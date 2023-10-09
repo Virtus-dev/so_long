@@ -6,7 +6,7 @@
 /*   By: arigonza <arigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 14:37:43 by arigonza          #+#    #+#             */
-/*   Updated: 2023/10/03 11:38:27 by arigonza         ###   ########.fr       */
+/*   Updated: 2023/10/06 14:48:49 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,18 @@
 # define HEIGHT 800
 # define WIDTH 800
 # define IDDLE 0
-# define TREE 2
+# define COLLECT_ITEM 'C'
 # define WALL 1
-# define FLOOR 0
-# define PLAYER "p"
+# define EXIT 'E'
+# define PLAYER 'P'
 
 //---------------------
+
+typedef struct s_node
+{
+	mlx_image_t		*img;
+	struct s_node	*next;
+}	t_node;
 
 /**
  * @brief Struct that holds a list of sprites in order to make an animation.
@@ -35,8 +41,8 @@
  */
 typedef struct s_animation
 {
-    mlx_image_t			*img;
-    struct s_animation	*next;
+    t_node			*head;
+	int				size;
 }	t_animation;
 
 /**
@@ -54,13 +60,15 @@ typedef struct s_player
     int			iddle;
 }	t_player;
 
-typedef struct s_entity
+typedef struct s_texture
 {
-	mlx_image_t	*entity;
+	mlx_image_t	*wall;
+	mlx_image_t	*floor;
+	mlx_image_t	*exit;
+	mlx_image_t	*player;
+	mlx_image_t	*collect_item;
 	char		indentifier;
-	int			x;
-	int			y;
-} t_entity;
+} t_texture;
 
 /**
  * @brief Holds all the important information concerning to the game,
@@ -68,16 +76,14 @@ typedef struct s_entity
  * @param mlx The mlx it self.
  * @param map The map passed by arguments that helps you to construct the field.
  * @param player The player.
- * @param wall The wall image to draw.
- * @param tree The tree image to draw.
- * @param floor The floor image to draw.
+ * @param textures The textures loaded and converted as mlx_image_t.
  */
 typedef struct s_game
 {
     mlx_t		*mlx;
     char		**map;
 	t_player	*player;
-	t_entity	**entity;
+	t_texture	*textures;
 }	t_game;
 
 
