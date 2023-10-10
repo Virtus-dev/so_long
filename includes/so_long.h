@@ -6,7 +6,7 @@
 /*   By: arigonza <arigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 14:37:43 by arigonza          #+#    #+#             */
-/*   Updated: 2023/10/06 14:48:49 by arigonza         ###   ########.fr       */
+/*   Updated: 2023/10/10 17:22:47 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,7 @@ typedef struct s_game
 //---------------------
 
 void	error(void);
+t_game	*ft_game_init(void);
+void	ft_load_textures(t_game *game);
 
 #endif

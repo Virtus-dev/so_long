@@ -6,7 +6,7 @@
 /*   By: arigonza <arigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 16:05:26 by arigonza          #+#    #+#             */
-/*   Updated: 2023/10/05 17:43:30 by arigonza         ###   ########.fr       */
+/*   Updated: 2023/10/10 17:47:05 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,30 +15,23 @@
 
 int32_t	main(void)
 {
-	// Start mlx
-	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "Test", true);
-	if (!mlx)
-        error();
-
-	// Try to load the file
-	mlx_texture_t* texture = mlx_load_png("textures/tree.png");
-	if (!texture)
+	t_game		*game;
+	
+	game = ft_game_init();
+	game->mlx = mlx_init(WIDTH, HEIGHT, "Test", true);
+	if (!game->mlx)
         error();
 	
-	// Convert texture to a displayable image
-	mlx_image_t* img = mlx_texture_to_image(mlx, texture);
-	if (!img)
-        error();
-
+	ft_load_textures(game);
 	// Display the image
-	if (mlx_image_to_window(mlx, img, 0, 0) < 0)
+	if (mlx_image_to_window(game->mlx, game->textures->wall, 0, 0) < 0)
         error();
 
-	mlx_loop(mlx);
+	mlx_loop(game->mlx);
 
 	// Optional, terminate will clean up any leftovers, this is just to demonstrate.
-	mlx_delete_image(mlx, img);
-	mlx_delete_texture(texture);
-	mlx_terminate(mlx);
+	mlx_delete_image(game->mlx, game->textures->wall);
+	//mlx_delete_texture(texture);
+	mlx_terminate(game->mlx);
 	return (EXIT_SUCCESS);
 }

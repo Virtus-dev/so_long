@@ -6,7 +6,7 @@
 /*   By: arigonza <arigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 06:30:45 by arigonza          #+#    #+#             */
-/*   Updated: 2023/10/05 18:32:32 by arigonza         ###   ########.fr       */
+/*   Updated: 2023/10/10 16:51:26 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	ft_render_map(t_game *game)
 				mlx_image_to_window(game->mlx, game->textures->player, x * 32, y * 32);
 			if (game->map[x][y] == EXIT)
 				mlx_image_to_window(game->mlx, game->textures->exit, x * 32, y * 32);
-			
 			x++;
 		}
 		x = 0;
