@@ -6,7 +6,7 @@
 #    By: arigonza <arigonza@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/25 13:36:46 by arigonza          #+#    #+#              #
-#    Updated: 2023/10/10 17:12:39 by arigonza         ###   ########.fr        #
+#    Updated: 2023/10/25 20:12:49 by arigonza         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,9 @@ BONUS_NAME := so_long_bonus
 
 CC := gcc
 
-CFLAGS := -Wall -Wextra -Werror -fsanitize=address -g3 -O3
+CFLAGS := -Wall -Wextra -Werror
+
+FSANITIZE := -fsanitize=address -g3 -O3
 
 LIBFT = lib/libft/libft.a
 
@@ -26,7 +28,7 @@ HEADERS := -I ./lib/libft/includes -I ./lib/MLX42/include
 
 EXTRA = -I include -ldl -lX11 -lXext -lglfw -pthread -lm 
 
-SRC = src/main.c src/utils.c
+SRC = src/main.c src/utils.c src/animations.c src/render.c src/map.c
 
 BONUS_SRC =
 

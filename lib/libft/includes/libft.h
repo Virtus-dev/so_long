@@ -6,7 +6,7 @@
 /*   By: arigonza <arigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 17:24:01 by arigonza          #+#    #+#             */
-/*   Updated: 2023/06/26 14:19:31 by arigonza         ###   ########.fr       */
+/*   Updated: 2023/10/25 20:03:22 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <string.h>
 # include <limits.h>
 # include "ft_printf.h"
+# include "get_next_line.h"
 
 /*
  * Struct

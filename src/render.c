@@ -6,34 +6,50 @@
 /*   By: arigonza <arigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 06:30:45 by arigonza          #+#    #+#             */
-/*   Updated: 2023/10/10 16:51:26 by arigonza         ###   ########.fr       */
+/*   Updated: 2023/10/26 00:25:48 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../includes/so_long.h"
 
 void	ft_render_map(t_game *game)
 {
     int			x;
 	int			y;
-	mlx_image_t	*img;
 
+	x = 0;
+	y = 0;
 	while (game->map[y])
 	{
-		while (game->map[x][y])
+		while (game->map[y][x])
 		{
-			mlx_image_to_window(game->mlx, mlx_texture_to_image(game->mlx, game->textures->floor), x * 32, y * 32);
-			if (game->map[x][y] == WALL)
+			mlx_image_to_window(game->mlx, game->textures->floor, x * 32, y * 32);
+			if (game->map[y][x] == WALL)
 				mlx_image_to_window(game->mlx, game->textures->wall, x * 32, y * 32);
-			if (game->map[x][y] == COLLECT_ITEM)
+			if (game->map[y][x] == COLLECT_ITEM)
 				mlx_image_to_window(game->mlx, game->textures->collect_item, x * 32, y * 32);
-			if (game->map[x][y] == PLAYER)
+			if (game->map[y][x] == PLAYER)
 				mlx_image_to_window(game->mlx, game->textures->player, x * 32, y * 32);
-			if (game->map[x][y] == EXIT)
+			if (game->map[y][x] == EXIT)
 				mlx_image_to_window(game->mlx, game->textures->exit, x * 32, y * 32);
 			x++;
 		}
 		x = 0;
 		y++;
+	}
+}
+
+
+void	ft_render_animation(void *param)
+{
+	t_game	*game;
+	t_node	*current;
+	
+	game = param;
+	current = game->player->animation->head;
+	while (current)
+	{
+		mlx_image_to_window(game->mlx, current->img, 32, 32);
+		current = current->next;
 	}
 }

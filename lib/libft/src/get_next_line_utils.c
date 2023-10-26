@@ -6,7 +6,7 @@
 /*   By: arigonza <arigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 18:22:00 by arigonza          #+#    #+#             */
-/*   Updated: 2023/09/26 15:00:23 by arigonza         ###   ########.fr       */
+/*   Updated: 2023/10/25 20:04:23 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ char	*ft_strjoin_gnl(char *s1, char *s2)
 
 	j = 0;
 	i = 0;
-	len_s1 = ft_strlen(s1);
-	len_s2 = ft_strlen(s2);
+	len_s1 = ft_strlen_gnl(s1);
+	len_s2 = ft_strlen_gnl(s2);
 	if (!s1 && !s2)
 		return (NULL);
 	combinedstring = malloc(sizeof(char) * (len_s1 + len_s2 + 1));
