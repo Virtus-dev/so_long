@@ -6,16 +6,16 @@
 /*   By: arigonza <arigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 07:18:05 by arigonza          #+#    #+#             */
-/*   Updated: 2023/10/26 08:51:10 by arigonza         ###   ########.fr       */
+/*   Updated: 2023/10/27 20:16:03 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-void error(void)
+void error(char *error)
 {
-	puts(mlx_strerror(mlx_errno));
-	ft_printf("ERROR");
+	//puts(mlx_strerror(mlx_errno));
+	ft_printf(error);
 	exit(EXIT_FAILURE);
 }
 
@@ -32,17 +32,20 @@ void	ft_load_textures(t_game *game)
 	game->textures = textures;
 }
 
-t_game	*ft_game_init(void)
+t_game	*ft_game_init(char *argv)
 {
 	t_game		*game;
 	t_player	*player;
+	int			fd;
 	
+	fd = open(argv, O_RDONLY);
 	game = (t_game *)malloc(sizeof(t_game));
+	ft_read_map(game, fd);
+	close(fd);
 	player = (t_player*)malloc(sizeof(t_player));
 	player->animation = NULL;
 	player->x = 0;
 	player->y = 0;
-	game->map = NULL;
 	game->mlx = NULL;
 	game->player = player;
 	game->textures = NULL;
@@ -53,22 +56,29 @@ t_game	*ft_game_init(void)
 char	**ft_cpymap(char **map)
 {
 	char	**map_cpy;
+	int		x_size;
 	int		y;
 	int		x;
 
-	map_cpy = (char**)malloc(ft_map_height(map) * sizeof(char*));
+	x_size = (int)ft_strlen(map[0]);
+	map_cpy = (char**)malloc(((int)ft_map_height(map) + 1) * sizeof(char*));
 	if (!map_cpy)
-		return (free(map_cpy), 0);
+	{
+		free(map_cpy);
+		error(MAPCPY_ERROR);
+	}
 	y = 0;
-	x = 0;
 	while (map[y])
 	{
+		x = 0;
+		map_cpy[y] = (char*)malloc(x_size * sizeof(char));
+		if (!map_cpy)
+			error(MAPCPY_ERROR);
 		while (map[y][x])
 		{
 			map_cpy[y][x] = map[y][x];
 			x++;
 		}
-		x = 0;
 		y++;
 	}
 	return (map_cpy);

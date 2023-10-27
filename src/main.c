@@ -6,7 +6,7 @@
 /*   By: arigonza <arigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 16:05:26 by arigonza          #+#    #+#             */
-/*   Updated: 2023/10/26 09:15:03 by arigonza         ###   ########.fr       */
+/*   Updated: 2023/10/27 22:37:50 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,34 +17,28 @@ int32_t	main(int argc, char **argv)
 {
 	t_game		*game;
 	t_animation	*player_animation;
-	int			fd;
-	//int			rows;
-	//int			columns;
-
+	
 	if (argc != 2)
-		error();
-	fd = open(argv[1], O_RDONLY);
-	game = ft_game_init();
+		error(INVALID_NUM_ARGS);
+	game = ft_game_init(argv[1]);
 	game->mlx = mlx_init(WIDTH, HEIGHT, "Test", false);
 	player_animation = ft_animation_init();
 	ft_iddle_player(player_animation, game);
 	game->player->animation = player_animation;
 	if (!game->mlx)
-        error();
-		
+        error(MLX_ERROR);
+	
 	// Load the basic textures
 	ft_load_textures(game);
 
 	// Map read and check
-	ft_read_map(game, fd);
-	ft_row_check(game->map);
-	ft_check_walls(game->map);
+	ft_check_map(game);
 
 	// Render the map
 	ft_render_map(game);
-	
+
 	// suposed to be the loop for the animations
-	mlx_loop_hook(game->mlx, &ft_render_animation, game);
+	//mlx_loop_hook(game->mlx, &ft_render_animation, game);
 
 	mlx_loop(game->mlx);
 
