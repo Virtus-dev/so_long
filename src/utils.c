@@ -6,7 +6,7 @@
 /*   By: arigonza <arigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 07:18:05 by arigonza          #+#    #+#             */
-/*   Updated: 2023/10/27 20:16:03 by arigonza         ###   ########.fr       */
+/*   Updated: 2023/10/29 13:13:09 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,34 +53,31 @@ t_game	*ft_game_init(char *argv)
 	return (game);
 }
 
-char	**ft_cpymap(char **map)
+char	**ft_cpymap(char **map, int x_size)
 {
 	char	**map_cpy;
-	int		x_size;
 	int		y;
 	int		x;
 
-	x_size = (int)ft_strlen(map[0]);
 	map_cpy = (char**)malloc(((int)ft_map_height(map) + 1) * sizeof(char*));
 	if (!map_cpy)
-	{
-		free(map_cpy);
-		error(MAPCPY_ERROR);
-	}
+		return (free(map_cpy), error(MAPCPY_ERROR), NULL);
 	y = 0;
 	while (map[y])
 	{
 		x = 0;
 		map_cpy[y] = (char*)malloc(x_size * sizeof(char));
-		if (!map_cpy)
-			error(MAPCPY_ERROR);
+		if (!map_cpy[y])
+			return (ft_free_map(map), NULL);
 		while (map[y][x])
 		{
 			map_cpy[y][x] = map[y][x];
 			x++;
 		}
+		map_cpy[y][x] = '\0';
 		y++;
 	}
+	map_cpy[y] = NULL;
 	return (map_cpy);
 }
 

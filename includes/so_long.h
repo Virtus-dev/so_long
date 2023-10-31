@@ -6,7 +6,7 @@
 /*   By: arigonza <arigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 14:37:43 by arigonza          #+#    #+#             */
-/*   Updated: 2023/10/27 23:46:17 by arigonza         ###   ########.fr       */
+/*   Updated: 2023/10/30 14:51:54 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 typedef struct s_node
 {
 	mlx_image_t		*img;
+	int				x;
+	int				y;
 	struct s_node	*next;
 }	t_node;
 
@@ -50,6 +52,7 @@ typedef struct s_player
     t_animation	*animation;
     int			x;
     int			y;
+	int			c_counter;
     int			iddle;
 }	t_player;
 
@@ -77,28 +80,39 @@ typedef struct s_game
     char		**map;
 	t_player	*player;
 	t_texture	*textures;
+	int			moves;
 }	t_game;
 
 //----------------------------------
 
+int		ft_win(t_game *game, int current_y, int current_x);
 // Utils
 void	error(char *error);
 t_game	*ft_game_init(char *argv);
 void	ft_load_textures(t_game *game);
-void	printMap(char ** map);
 size_t	ft_map_height(char **map);
+// Free utils
+void	ft_print_map(char ** map);
+void	ft_free_map(char **map);
 // Map
 int		ft_read_map(t_game *game, int fd);
 void	ft_check_map(t_game *game);
 void	ft_check_walls(t_game *game);
-char	**ft_cpymap(char **map);
+char	**ft_cpymap(char **map, int x_size);
 // Render
 void	ft_render_map(t_game *game);
+void	ft_render_player(t_game *game);
 void	ft_render_animation(void *param);
+// Player moves
+void	ft_controls(mlx_key_data_t keydata, void *param);
+void	ft_up(t_game *game);
+void	ft_down(t_game *game);
+void	ft_left(t_game *game);
+void	ft_right(t_game *game);
 // Animations
 t_node		*ft_new_img_node(mlx_image_t *image);
 t_animation	*ft_animation_init();
-void		ft_img_into_animation(t_animation *animation, t_node *img);
+void		ft_add_img(t_animation *animation, t_node *img);
 void		ft_iddle_player(t_animation *animation, t_game *game);
 
 #endif

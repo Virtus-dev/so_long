@@ -6,7 +6,7 @@
 /*   By: arigonza <arigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 12:20:09 by arigonza          #+#    #+#             */
-/*   Updated: 2023/10/25 20:06:48 by arigonza         ###   ########.fr       */
+/*   Updated: 2023/10/30 07:22:12 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ t_node	*ft_new_img_node(mlx_image_t *image)
 	t_node	*node;
 	
 	node = (t_node *)malloc(sizeof(t_node));
+	if (!node)
+		return (free(node), NULL);
 	node->img = image;
 	node->next = NULL;
 	return (node);
@@ -27,13 +29,15 @@ t_animation	*ft_animation_init()
 	t_animation *animation;
 	
 	animation = (t_animation*)malloc(sizeof(t_animation));
+	if (!animation)
+		return (free(animation), NULL);
 	animation->head = NULL;
 	animation->size = 0;
 	
 	return (animation);
 }
 
-void	ft_img_into_animation(t_animation *animation, t_node *img)
+void	ft_add_img(t_animation *animation, t_node *img)
 {
 	t_node	*current;
 	
@@ -49,6 +53,7 @@ void	ft_img_into_animation(t_animation *animation, t_node *img)
 		current->next = img;
 		//ft_printf("working");
 	}
+	ft_printf("Adding img into the animation\n");
 	animation->size++;
 }
 
@@ -64,5 +69,5 @@ void	ft_iddle_player(t_animation *animation, t_game *game)
 	nodes[3] = ft_new_img_node(mlx_texture_to_image(game->mlx, mlx_load_png("textures/iddle_player_3.png")));
 	i = 0;
 	while (i < 4)
-		ft_img_into_animation(animation, nodes[i++]);
+		ft_add_img(animation, nodes[i++]);
 }

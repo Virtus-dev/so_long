@@ -6,7 +6,7 @@
 /*   By: arigonza <arigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 02:29:12 by arigonza          #+#    #+#             */
-/*   Updated: 2023/10/27 20:13:34 by arigonza         ###   ########.fr       */
+/*   Updated: 2023/10/29 15:51:35 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,38 +121,34 @@ void	ft_check_valid_path(char **map)
 {
 	int	y;
 	int	x;
-	ft_printf("In check_valid_path.\n");
+
 	y = 0;
-	x = 0;
 	if (!map)
-		error("Invalid map");
+		error("No map to check a valid path");
 	while (map[y])
 	{
 		x = 0;
-		//ft_printf("In check_valid_path map[%d][%d]-> %c.\n", y, x, map[y][x]);
 		while (map[y][x])
 		{
-			ft_printf("%c", map[y][x]);
-			if (map[y][x] == 'E' || map[y][x] == 'C')
+			if (map[y][x] == EXIT || map[y][x] == COLLECT_ITEM)
 				error(NON_VALID_PATH);
 			x++;
 		}
-		ft_printf("\n");
 		y++;
 	}
-	ft_printf("outside loop.\n");
 }
 
 // Checks if the map is or is not valid.
 void	ft_check_map(t_game *game)
 {
 	char	**mapcpy;
-
-	mapcpy = ft_cpymap(game->map);
-	ft_printf("Before check_walls function.\n");
+	int		x_size;
+	
+	x_size = (int)ft_strlen(game->map[0]);
+	mapcpy = ft_cpymap(game->map, x_size);
 	ft_check_walls(game);
-	ft_printf("After check_walls function.\n");
 	ft_flood_fill(mapcpy, game->player->y, game->player->x);
-	ft_printf("After floodfill.\n");
+	ft_printf("BEFORE PATH CHECK\n");
 	ft_check_valid_path(mapcpy);
+	ft_printf("AFTER PATH CHECK\n");
 }

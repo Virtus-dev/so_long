@@ -6,7 +6,7 @@
 #    By: arigonza <arigonza@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/25 13:36:46 by arigonza          #+#    #+#              #
-#    Updated: 2023/10/25 20:12:49 by arigonza         ###   ########.fr        #
+#    Updated: 2023/10/30 07:21:52 by arigonza         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,8 @@ HEADERS := -I ./lib/libft/includes -I ./lib/MLX42/include
 
 EXTRA = -I include -ldl -lX11 -lXext -lglfw -pthread -lm 
 
-SRC = src/main.c src/utils.c src/animations.c src/render.c src/map.c
+SRC = src/main.c src/utils.c src/animations.c src/render.c src/map.c \
+	src/free_utils.c src/ply_moves.c src/win.c
 
 BONUS_SRC =
 
