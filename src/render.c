@@ -6,7 +6,7 @@
 /*   By: arigonza <arigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 06:30:45 by arigonza          #+#    #+#             */
-/*   Updated: 2023/10/30 15:45:11 by arigonza         ###   ########.fr       */
+/*   Updated: 2023/11/08 14:50:47 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	ft_render_map(t_game *game)
 		}
 		y++;
 	}
+	game->total_c = game->player->c_counter;
 }
 
 void	ft_render_player(t_game *game)
@@ -56,20 +57,6 @@ void	ft_render_player(t_game *game)
 			curr_x++;
 		}
 		curr_y++;
-	}
-}
-
-void	ft_render_animation(void *param)
-{
-	t_game	*game;
-	t_node	*current;
-	
-	game = param;
-	current = game->player->animation->head;
-	while (current)
-	{
-		mlx_image_to_window(game->mlx, current->img, 32, 32);
-		current = current->next;
 	}
 }
 

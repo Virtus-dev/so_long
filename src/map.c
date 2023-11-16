@@ -6,7 +6,7 @@
 /*   By: arigonza <arigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 02:29:12 by arigonza          #+#    #+#             */
-/*   Updated: 2023/10/29 15:51:35 by arigonza         ###   ########.fr       */
+/*   Updated: 2023/11/16 17:58:27 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,17 +50,13 @@ int	ft_read_map(t_game *game, int fd)
  * 
  * @param map The map to check.
  */
-void	ft_check_walls(t_game *game)
+void	ft_check_walls(t_game *game, size_t y_size, size_t x_size)
 {
 	int	i;
 	int	j;
-	size_t	x_size;
-	size_t	y_size;
 	
 	i = 0;
 	j = 0;
-	x_size = ft_strlen(game->map[0]);
-	y_size = ft_map_height(game->map);
 	while (game->map[i])
 	{
 		if (ft_strlen(game->map[i]) != x_size)
@@ -75,11 +71,6 @@ void	ft_check_walls(t_game *game)
 				error(MAP_ERROR);
 			if (game->map[i][x_size - 1] != WALL)
 				error(MAP_ERROR);
-			if (game->map[i][j] == PLAYER)
-			{
-				game->player->x = j;
-				game->player->y = i;
-			}
 			j++;
 		}
 		j = 0;
@@ -87,27 +78,32 @@ void	ft_check_walls(t_game *game)
 	}
 }
 
-/**
- * @brief Looks for the positions nearby and convert 'C' and 'E' into '0', and later on, into 'F'.
- * We'll use it later to find a valid path looking for the 'F' in the map.
- * 
- * @param map
- * @param y_position Y position of the player.
- * @param x_position X position of the player.
- */
-void	ft_flood_fill(char **map, int y_position, int x_position)
+void	ft_check_elements(char **map)
 {
-	if (x_position < 0 || y_position < 0 ||
-		map[y_position][x_position] == WALL || map[y_position][x_position] == 'F')
-		return ;
-	if (map[y_position][x_position] == EXIT || map[y_position][x_position] == COLLECT_ITEM)
-		map[y_position][x_position] = '0';
-		
-	map[y_position][x_position] = 'F';
-	ft_flood_fill(map, y_position + 1, x_position);
-	ft_flood_fill(map, y_position - 1, x_position);
-	ft_flood_fill(map, y_position, x_position + 1);
-	ft_flood_fill(map, y_position, x_position - 1);
+	int	y;
+	int	x;
+	int	ply;
+	int	c;
+	int	exits;
+	
+	y = 0;
+	while (map[y])
+	{
+		x = 0;
+		while (map[y][x])
+		{
+			if (map[y][x] == PLAYER)
+				ply++;
+			if (map[y][x] == COLLECT_ITEM)
+				c++;
+			if (map[y][x] == EXIT)
+				exits++;
+			x++;
+		}
+		y++;
+	}
+	if (ply != 1 && c != 1 && exits != 1)
+		error(MAP_ERROR);
 }
 
 /**
@@ -142,13 +138,17 @@ void	ft_check_valid_path(char **map)
 void	ft_check_map(t_game *game)
 {
 	char	**mapcpy;
-	int		x_size;
+	size_t	x_size;
+	size_t	y_size;
 	
+	y_size = ft_map_height(game->map);
 	x_size = (int)ft_strlen(game->map[0]);
-	mapcpy = ft_cpymap(game->map, x_size);
-	ft_check_walls(game);
+	if (y_size > x_size)
+		error(MAP_ERROR);
+	mapcpy = ft_cpymap(game->map, (int)x_size);
+	ft_check_walls(game, y_size, x_size);
+	ft_check_elements(mapcpy);
+	ft_set_ply_pos(game, mapcpy);
 	ft_flood_fill(mapcpy, game->player->y, game->player->x);
-	ft_printf("BEFORE PATH CHECK\n");
 	ft_check_valid_path(mapcpy);
-	ft_printf("AFTER PATH CHECK\n");
 }

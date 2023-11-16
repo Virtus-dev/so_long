@@ -6,7 +6,7 @@
 /*   By: arigonza <arigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 07:18:05 by arigonza          #+#    #+#             */
-/*   Updated: 2023/10/29 13:13:09 by arigonza         ###   ########.fr       */
+/*   Updated: 2023/11/16 20:14:57 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ void	ft_load_textures(t_game *game)
 	t_texture	*textures;
 	
 	textures = (t_texture*)malloc(sizeof(t_texture));
-	textures->wall = mlx_texture_to_image(game->mlx, mlx_load_png("textures/tree.png"));
-	textures->floor = mlx_texture_to_image(game->mlx, mlx_load_png("textures/grass.png"));
-	textures->collect_item = mlx_texture_to_image(game->mlx, mlx_load_png("textures/rock2.png"));
-	textures->player = mlx_texture_to_image(game->mlx, mlx_load_png("textures/player.png"));
+	textures->wall = mlx_texture_to_image(game->mlx, mlx_load_png("textures/wall.png"));
+	textures->floor = mlx_texture_to_image(game->mlx, mlx_load_png("textures/floor.png"));
+	textures->collect_item = mlx_texture_to_image(game->mlx, mlx_load_png("textures/collect_item.png"));
+	textures->player = mlx_texture_to_image(game->mlx, mlx_load_png("textures/ply_right.png"));
 	textures->exit = mlx_texture_to_image(game->mlx, mlx_load_png("textures/door.png"));
 	game->textures = textures;
 }
@@ -53,40 +53,19 @@ t_game	*ft_game_init(char *argv)
 	return (game);
 }
 
-char	**ft_cpymap(char **map, int x_size)
+void	ft_get_citem(t_game *game)
 {
-	char	**map_cpy;
-	int		y;
-	int		x;
-
-	map_cpy = (char**)malloc(((int)ft_map_height(map) + 1) * sizeof(char*));
-	if (!map_cpy)
-		return (free(map_cpy), error(MAPCPY_ERROR), NULL);
-	y = 0;
-	while (map[y])
-	{
-		x = 0;
-		map_cpy[y] = (char*)malloc(x_size * sizeof(char));
-		if (!map_cpy[y])
-			return (ft_free_map(map), NULL);
-		while (map[y][x])
-		{
-			map_cpy[y][x] = map[y][x];
-			x++;
-		}
-		map_cpy[y][x] = '\0';
-		y++;
-	}
-	map_cpy[y] = NULL;
-	return (map_cpy);
-}
-
-size_t	ft_map_height(char **map)
-{
-	int i;
+    int		i;
 
 	i = 0;
-	while (map[i])
+	while (i <= game->total_c)
+	{
+		if (game->textures->collect_item->instances[i].y == game->textures->player->instances[0].y &&
+			game->textures->collect_item->instances[i].x == game->textures->player->instances[0].x)
+		{
+			ft_printf("");
+			game->textures->collect_item->instances[i].enabled = 0;
+		}
 		i++;
-	return (i);
+	}
 }

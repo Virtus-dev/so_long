@@ -6,7 +6,7 @@
 /*   By: arigonza <arigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 23:22:10 by arigonza          #+#    #+#             */
-/*   Updated: 2023/10/30 11:00:11 by arigonza         ###   ########.fr       */
+/*   Updated: 2023/11/08 13:25:21 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ft_up(t_game *game)
 	if (map[currnt_y - 1][currnt_x] == COLLECT_ITEM)
 	{
 		game->player->c_counter--;
-		//ft_get_citem(game);		
+		ft_get_citem(game);
 	}
 	game->map[currnt_y][currnt_x] = '0';
 	game->map[currnt_y - 1][currnt_x] = PLAYER;
@@ -71,7 +71,7 @@ void	ft_down(t_game *game)
 	if (map[currnt_y + 1][currnt_x] == COLLECT_ITEM)
 	{
 		game->player->c_counter--;
-		//ft_get_citem(game);		
+		ft_get_citem(game);
 	}
 	game->map[currnt_y][currnt_x] = '0';
 	game->map[currnt_y + 1][currnt_x] = PLAYER;
@@ -96,7 +96,7 @@ void	ft_left(t_game *game)
 	if (map[currnt_y][currnt_x - 1] == COLLECT_ITEM)
 	{
 		game->player->c_counter--;
-		//ft_get_citem(game);		
+		ft_get_citem(game);
 	}
 	game->map[currnt_y][currnt_x] = '0';
 	game->map[currnt_y][currnt_x - 1] = PLAYER;
@@ -121,7 +121,7 @@ void	ft_right(t_game *game)
 	if (map[currnt_y][currnt_x + 1] == COLLECT_ITEM)
 	{
 		game->player->c_counter--;
-		//ft_get_citem(game);		
+		ft_get_citem(game);
 	}
 	game->map[currnt_y][currnt_x] = '0';
 	game->map[currnt_y][currnt_x + 1] = PLAYER;

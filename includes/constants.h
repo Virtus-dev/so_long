@@ -6,15 +6,15 @@
 /*   By: arigonza <arigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 10:35:50 by arigonza          #+#    #+#             */
-/*   Updated: 2023/10/29 12:17:30 by arigonza         ###   ########.fr       */
+/*   Updated: 2023/11/16 20:18:19 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CONSTANTS_H
 # define CONSTANTS_H
 
-# define HEIGHT 720
-# define WIDTH 1080
+# define HEIGHT 32
+# define WIDTH 32
 # define IDDLE 0
 # define COLLECT_ITEM 'C'
 # define WALL '1'

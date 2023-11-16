@@ -6,7 +6,7 @@
 #    By: arigonza <arigonza@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/25 13:36:46 by arigonza          #+#    #+#              #
-#    Updated: 2023/10/30 07:21:52 by arigonza         ###   ########.fr        #
+#    Updated: 2023/11/16 19:27:46 by arigonza         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,24 +24,32 @@ LIBFT = lib/libft/libft.a
 
 MLX42 = ./lib/MLX42/build/libmlx42.a
 
-HEADERS := -I ./lib/libft/includes -I ./lib/MLX42/include
+EXTRA := -I include -ldl -lX11 -lXext -lglfw -pthread -lm
 
-EXTRA = -I include -ldl -lX11 -lXext -lglfw -pthread -lm 
+OBJDIR := obj
 
-SRC = src/main.c src/utils.c src/animations.c src/render.c src/map.c \
-	src/free_utils.c src/ply_moves.c src/win.c
+OBJDIR_BONUS := obj_bonus
 
-BONUS_SRC =
+SRC = src/main.c src/utils.c src/render.c src/map.c \
+	src/map_utils.c src/ply_moves.c src/win.c
 
-OBJ = $(SRC:.c=.o)
+BONUS_SRC = 
 
-BONUS_OBJ = $(BONUS_SRC:.c=.o)
+OBJ = $(patsubst src/%.c,$(OBJDIR)/%.o, $(SRC))
+
+BONUS_OBJ = $(patsubst src/%.c,$(OBJDIR_BONUS)/%.o,$(BONUS_SRC))
+
+$(OBJDIR)/%.o : src/%.c | $(OBJDIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJDIR_BONUS)/%.o : src/%.c | $(OBJDIR_BONUS)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 all : $(NAME)
 
 $(NAME) : $(OBJ) $(LIBFT) $(MLX42)
 	@echo "$(GREEN)Compiling so_long...$(DEF_COLOR)"
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT) $(MLX42) $(EXTRA)
+	@$(CC) $(CFLAGS) -o $@ $^ $(EXTRA)
 	@echo "$(GREEN)so_long ready$(DEF_COLOR)"
 
 $(LIBFT) :
@@ -54,10 +62,19 @@ $(MLX42) :
 	@make -s -C lib/MLX42/build
 	@echo "$(GREEN)MLX42 compiled$(DEF_COLOR)"
 
+$(BONUS_NAME) : $(BONUS_OBJ) $(LIBFT) $(MLX42)
+	@echo "$(BLUE)Compiling so_long bonus...$(DEF_COLOR)"
+	@$(CC) $(CFLAGS) -o $@ $^ $(EXTRA)
+	@echo "$(BLUE)so_long bonus compiled$(DEF_COLOR)"
+
+$(OBJDIR) :
+	mkdir -p $(OBJDIR)
+
 clean :
 	@make -s clean -C lib/libft
 	@make -s clean -C lib/MLX42/build
-	@rm -rf $(OBJ) $(BONUS_OBJ)
+	@rm -rf $(OBJDIR)
+	
 	@echo "$(RED)Objects cleaned...$(DEF_COLOR)"
 
 fclean : clean
