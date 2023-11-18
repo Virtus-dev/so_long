@@ -6,7 +6,7 @@
 /*   By: arigonza <arigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 23:22:10 by arigonza          #+#    #+#             */
-/*   Updated: 2023/11/08 13:25:21 by arigonza         ###   ########.fr       */
+/*   Updated: 2023/11/18 22:00:50 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,10 @@ void	ft_controls(mlx_key_data_t keydata, void *param)
 	if (keydata.key == MLX_KEY_D && keydata.action == MLX_RELEASE)
 		ft_right(game);
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_RELEASE)
+	{
+		ft_free_all(game);
 		mlx_close_window(game->mlx);
-	
+	}
 }
 
 void	ft_up(t_game *game)
@@ -52,6 +54,7 @@ void	ft_up(t_game *game)
 	game->map[currnt_y - 1][currnt_x] = PLAYER;
 	game->player->y--;
 	game->moves++;
+	ft_score(game);
 	ft_printf("moves: %d\n", game->moves);
 }
 
@@ -77,6 +80,7 @@ void	ft_down(t_game *game)
 	game->map[currnt_y + 1][currnt_x] = PLAYER;
 	game->player->y++;
 	game->moves++;
+	ft_score(game);
 	ft_printf("moves: %d\n", game->moves);
 }
 
@@ -102,6 +106,7 @@ void	ft_left(t_game *game)
 	game->map[currnt_y][currnt_x - 1] = PLAYER;
 	game->player->x--;
 	game->moves++;
+	ft_score(game);
 	ft_printf("moves: %d\n", game->moves);
 }
 
@@ -127,5 +132,6 @@ void	ft_right(t_game *game)
 	game->map[currnt_y][currnt_x + 1] = PLAYER;
 	game->player->x++;
 	game->moves++;
+	ft_score(game);
 	ft_printf("moves: %d\n", game->moves);
 }

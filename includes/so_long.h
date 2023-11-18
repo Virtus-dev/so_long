@@ -6,7 +6,7 @@
 /*   By: arigonza <arigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 14:37:43 by arigonza          #+#    #+#             */
-/*   Updated: 2023/11/16 20:18:55 by arigonza         ###   ########.fr       */
+/*   Updated: 2023/11/18 21:54:19 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ typedef struct s_player
     int			x;
     int			y;
 	int			c_counter;
-    int			iddle;
 }	t_player;
 
 typedef struct s_texture
@@ -83,12 +82,14 @@ typedef struct s_game
 	int			num_rows;
 	int			num_col;
 	int			moves;
+	mlx_image_t	*score;
 	int			total_c;
 }	t_game;
 
 //----------------------------------
 
 int		ft_win(t_game *game, int current_y, int current_x);
+void	ft_score(t_game *game);
 // Utils
 void	error(char *error);
 t_game	*ft_game_init(char *argv);
@@ -98,6 +99,7 @@ void	ft_get_citem(t_game *game);
 void	ft_print_map(char ** map);
 void	ft_flood_fill(char **map, int y_position, int x_position);
 void	ft_free_map(char **map);
+void	ft_free_all(t_game *game);
 size_t	ft_map_height(char **map);
 void	ft_set_ply_pos(t_game *game, char** map);
 // Map

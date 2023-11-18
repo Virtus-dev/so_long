@@ -6,7 +6,7 @@
 #    By: arigonza <arigonza@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/25 13:36:46 by arigonza          #+#    #+#              #
-#    Updated: 2023/11/16 19:27:46 by arigonza         ###   ########.fr        #
+#    Updated: 2023/11/18 21:45:11 by arigonza         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ all : $(NAME)
 
 $(NAME) : $(OBJ) $(LIBFT) $(MLX42)
 	@echo "$(GREEN)Compiling so_long...$(DEF_COLOR)"
-	@$(CC) $(CFLAGS) -o $@ $^ $(EXTRA)
+	@$(CC) $(CFLAGS) -o $@ $^ $(EXTRA) $(FSANITIZE)
 	@echo "$(GREEN)so_long ready$(DEF_COLOR)"
 
 $(LIBFT) :

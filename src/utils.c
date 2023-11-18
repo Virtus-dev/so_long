@@ -6,7 +6,7 @@
 /*   By: arigonza <arigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 07:18:05 by arigonza          #+#    #+#             */
-/*   Updated: 2023/11/16 20:14:57 by arigonza         ###   ########.fr       */
+/*   Updated: 2023/11/18 23:05:41 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,38 @@
 
 void error(char *error)
 {
-	//puts(mlx_strerror(mlx_errno));
 	ft_printf(error);
 	exit(EXIT_FAILURE);
 }
 
 void	ft_load_textures(t_game *game)
 {
-	t_texture	*textures;
+	t_texture		*textures;
+	mlx_texture_t	*wall;
+	mlx_texture_t	*floor;
+	mlx_texture_t	*exit;
+	mlx_texture_t	*coll;
+	mlx_texture_t	*ply;
+	
+	wall = mlx_load_png("textures/wall.png");
+	floor = mlx_load_png("textures/floor.png");
+	coll = mlx_load_png("textures/collect_item.png");
+	ply = mlx_load_png("textures/ply_right.png");
+	exit = mlx_load_png("textures/door.png");
 	
 	textures = (t_texture*)malloc(sizeof(t_texture));
-	textures->wall = mlx_texture_to_image(game->mlx, mlx_load_png("textures/wall.png"));
+	textures->wall = mlx_texture_to_image(game->mlx, wall);
 	textures->floor = mlx_texture_to_image(game->mlx, mlx_load_png("textures/floor.png"));
 	textures->collect_item = mlx_texture_to_image(game->mlx, mlx_load_png("textures/collect_item.png"));
 	textures->player = mlx_texture_to_image(game->mlx, mlx_load_png("textures/ply_right.png"));
 	textures->exit = mlx_texture_to_image(game->mlx, mlx_load_png("textures/door.png"));
 	game->textures = textures;
+	
+	mlx_delete_texture(wall);
+	mlx_delete_texture(floor);
+	mlx_delete_texture(ply);
+	mlx_delete_texture(coll);
+	mlx_delete_texture(exit);
 }
 
 t_game	*ft_game_init(char *argv)
@@ -46,6 +62,8 @@ t_game	*ft_game_init(char *argv)
 	player->animation = NULL;
 	player->x = 0;
 	player->y = 0;
+	player->c_counter = 0;
+	game->moves = 0;
 	game->mlx = NULL;
 	game->player = player;
 	game->textures = NULL;
@@ -63,9 +81,21 @@ void	ft_get_citem(t_game *game)
 		if (game->textures->collect_item->instances[i].y == game->textures->player->instances[0].y &&
 			game->textures->collect_item->instances[i].x == game->textures->player->instances[0].x)
 		{
-			ft_printf("");
+			ft_printf("GOLD!\n");
 			game->textures->collect_item->instances[i].enabled = 0;
 		}
 		i++;
 	}
+}
+
+void	ft_free_all(t_game *game)
+{
+	mlx_delete_image(game->mlx, game->textures->wall);
+	mlx_delete_image(game->mlx, game->textures->collect_item);
+	mlx_delete_image(game->mlx, game->textures->exit);
+	mlx_delete_image(game->mlx, game->textures->player);
+	mlx_delete_image(game->mlx, game->textures->floor);
+
+	ft_free_map(game->map);
+	//mlx_terminate(game->mlx);
 }

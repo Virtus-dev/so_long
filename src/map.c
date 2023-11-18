@@ -6,7 +6,7 @@
 /*   By: arigonza <arigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 02:29:12 by arigonza          #+#    #+#             */
-/*   Updated: 2023/11/16 17:58:27 by arigonza         ###   ########.fr       */
+/*   Updated: 2023/11/18 22:50:03 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,9 @@ void	ft_check_elements(char **map)
 	int	c;
 	int	exits;
 	
+	ply = 0;
+	c = 0;
+	exits = 0;
 	y = 0;
 	while (map[y])
 	{
@@ -102,7 +105,7 @@ void	ft_check_elements(char **map)
 		}
 		y++;
 	}
-	if (ply != 1 && c != 1 && exits != 1)
+	if (ply != 1 || c < 1 || exits != 1)
 		error(MAP_ERROR);
 }
 
@@ -145,10 +148,13 @@ void	ft_check_map(t_game *game)
 	x_size = (int)ft_strlen(game->map[0]);
 	if (y_size > x_size)
 		error(MAP_ERROR);
+	game->num_col = y_size;
+	game->num_rows = x_size;
 	mapcpy = ft_cpymap(game->map, (int)x_size);
 	ft_check_walls(game, y_size, x_size);
 	ft_check_elements(mapcpy);
 	ft_set_ply_pos(game, mapcpy);
 	ft_flood_fill(mapcpy, game->player->y, game->player->x);
 	ft_check_valid_path(mapcpy);
+	ft_free_map(mapcpy);
 }
