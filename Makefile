@@ -6,7 +6,7 @@
 #    By: arigonza <arigonza@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/25 13:36:46 by arigonza          #+#    #+#              #
-#    Updated: 2023/11/18 21:45:11 by arigonza         ###   ########.fr        #
+#    Updated: 2023/11/22 21:42:30 by arigonza         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,18 @@ LIBFT = lib/libft/libft.a
 
 MLX42 = ./lib/MLX42/build/libmlx42.a
 
+ML42_INSTALL := ./lib/MLX42
+
+$(MLX42_INSTALL) :
+	@echo $(BLUE)INSTALLING MLX42...$(DEF_COLOR)
+	@cd $(ML42_DIR)
+	@cmake -B build
+	@cmake --build build -j4
+	@echo $(BLUE)MLX42 INSTALLED.$(DEF_COLOR)
+
 EXTRA := -I include -ldl -lX11 -lXext -lglfw -pthread -lm
+
+EXTRA_MAC := -framework Cocoa -framework OpenGL -framework IOKit -Iinclude -lglfw -L"/Users/arigonza/.brew/opt/glfw/lib/"
 
 OBJDIR := obj
 
@@ -40,35 +51,35 @@ OBJ = $(patsubst src/%.c,$(OBJDIR)/%.o, $(SRC))
 BONUS_OBJ = $(patsubst src/%.c,$(OBJDIR_BONUS)/%.o,$(BONUS_SRC))
 
 $(OBJDIR)/%.o : src/%.c | $(OBJDIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJDIR_BONUS)/%.o : src/%.c | $(OBJDIR_BONUS)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 all : $(NAME)
 
 $(NAME) : $(OBJ) $(LIBFT) $(MLX42)
 	@echo "$(GREEN)Compiling so_long...$(DEF_COLOR)"
 	@$(CC) $(CFLAGS) -o $@ $^ $(EXTRA) $(FSANITIZE)
-	@echo "$(GREEN)so_long ready$(DEF_COLOR)"
+	@echo "$(GREEN)so_long ready.$(DEF_COLOR)"
 
 $(LIBFT) :
 	@echo "$(GREEN)Compiling libft...$(DEF_COLOR)"
 	@make -s -C lib/libft
-	@echo "$(GREEN)Libft compiled$(DEF_COLOR)"
+	@echo "$(GREEN)Libft compiled.$(DEF_COLOR)"
 
 $(MLX42) : 
 	@echo "$(GREEN)Compiling MLX42...$(DEF_COLOR)"
 	@make -s -C lib/MLX42/build
-	@echo "$(GREEN)MLX42 compiled$(DEF_COLOR)"
+	@echo "$(GREEN)MLX42 compiled.$(DEF_COLOR)"
 
 $(BONUS_NAME) : $(BONUS_OBJ) $(LIBFT) $(MLX42)
 	@echo "$(BLUE)Compiling so_long bonus...$(DEF_COLOR)"
 	@$(CC) $(CFLAGS) -o $@ $^ $(EXTRA)
-	@echo "$(BLUE)so_long bonus compiled$(DEF_COLOR)"
+	@echo "$(BLUE)so_long bonus compiled.$(DEF_COLOR)"
 
 $(OBJDIR) :
-	mkdir -p $(OBJDIR)
+	@mkdir -p $(OBJDIR)
 
 clean :
 	@make -s clean -C lib/libft

@@ -6,7 +6,7 @@
 /*   By: arigonza <arigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 12:20:09 by arigonza          #+#    #+#             */
-/*   Updated: 2023/11/08 14:37:51 by arigonza         ###   ########.fr       */
+/*   Updated: 2023/11/22 22:29:52 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,19 +54,4 @@ void	ft_add_img(t_animation *animation, t_node *img)
 	}
 	ft_printf("Adding img into the animation\n");
 	animation->size++;
-}
-
-void	ft_iddle_player(t_animation *animation, t_game *game)
-{
-	int		i;
-	t_node	**nodes;
-	
-	nodes = (t_node**)malloc(4 * sizeof(t_node*));
-	nodes[0] = ft_new_img_node(mlx_texture_to_image(game->mlx, mlx_load_png("textures/iddle_player_0.png")));
-	nodes[1] = ft_new_img_node(mlx_texture_to_image(game->mlx, mlx_load_png("textures/iddle_player_1.png")));
-	nodes[2] = ft_new_img_node(mlx_texture_to_image(game->mlx, mlx_load_png("textures/iddle_player_2.png")));
-	nodes[3] = ft_new_img_node(mlx_texture_to_image(game->mlx, mlx_load_png("textures/iddle_player_3.png")));
-	i = 0;
-	while (i < 4)
-		ft_add_img(animation, nodes[i++]);
 }

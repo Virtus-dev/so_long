@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   so_long_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arigonza <arigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/26 14:37:43 by arigonza          #+#    #+#             */
-/*   Updated: 2023/11/27 20:54:38 by arigonza         ###   ########.fr       */
+/*   Created: 2023/11/27 20:46:25 by arigonza          #+#    #+#             */
+/*   Updated: 2023/11/27 20:47:22 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#ifndef SO_LONG_BONUS_H
+# define SO_LONG_BONUS_H
 # include <stdio.h>
 # include "../lib/libft/includes/libft.h"
 # include "../lib/libft/includes/ft_printf.h"
 # include "../lib/libft/includes/get_next_line.h"
 # include "../lib/MLX42/include/MLX42/MLX42.h"
-# include "constants.h"
+# include "constants_bonus.h"
 
 //------------------------------------
 
@@ -91,7 +91,6 @@ typedef struct s_game
 
 int		ft_win(t_game *game, int current_y, int current_x);
 void	ft_score(t_game *game);
-void	ft_door_open(t_game *game);
 // Utils
 void	error(char *error);
 t_game	*ft_game_init(char *argv);

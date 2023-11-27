@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ply_moves.c                                        :+:      :+:    :+:   */
+/*   ply_moves_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arigonza <arigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/28 23:22:10 by arigonza          #+#    #+#             */
-/*   Updated: 2023/11/27 20:38:24 by arigonza         ###   ########.fr       */
+/*   Created: 2023/11/27 20:32:55 by arigonza          #+#    #+#             */
+/*   Updated: 2023/11/27 20:36:59 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	ft_up(t_game *game)
 	game->map[currnt_y - 1][currnt_x] = PLAYER;
 	game->player->y--;
 	game->moves++;
+	ft_score(game);
 	ft_printf("moves: %d\n", game->moves);
 }
 
@@ -77,6 +78,7 @@ void	ft_down(t_game *game)
 	game->map[currnt_y + 1][currnt_x] = PLAYER;
 	game->player->y++;
 	game->moves++;
+	ft_score(game);
 	ft_printf("moves: %d\n", game->moves);
 }
 
@@ -101,6 +103,7 @@ void	ft_left(t_game *game)
 	game->map[currnt_y][currnt_x - 1] = PLAYER;
 	game->player->x--;
 	game->moves++;
+	ft_score(game);
 	ft_printf("moves: %d\n", game->moves);
 }
 
@@ -125,5 +128,6 @@ void	ft_right(t_game *game)
 	game->map[currnt_y][currnt_x + 1] = PLAYER;
 	game->player->x++;
 	game->moves++;
+	ft_score(game);
 	ft_printf("moves: %d\n", game->moves);
 }

@@ -6,7 +6,7 @@
 /*   By: arigonza <arigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 07:18:05 by arigonza          #+#    #+#             */
-/*   Updated: 2023/11/18 23:05:41 by arigonza         ###   ########.fr       */
+/*   Updated: 2023/11/27 20:52:45 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	ft_load_textures(t_game *game)
 	mlx_texture_t	*wall;
 	mlx_texture_t	*floor;
 	mlx_texture_t	*exit;
+	mlx_texture_t	*exit_open;
 	mlx_texture_t	*coll;
 	mlx_texture_t	*ply;
 	
@@ -32,13 +33,15 @@ void	ft_load_textures(t_game *game)
 	coll = mlx_load_png("textures/collect_item.png");
 	ply = mlx_load_png("textures/ply_right.png");
 	exit = mlx_load_png("textures/door.png");
+	exit_open = mlx_load_png("textures/door_open.png");
 	
 	textures = (t_texture*)malloc(sizeof(t_texture));
 	textures->wall = mlx_texture_to_image(game->mlx, wall);
-	textures->floor = mlx_texture_to_image(game->mlx, mlx_load_png("textures/floor.png"));
-	textures->collect_item = mlx_texture_to_image(game->mlx, mlx_load_png("textures/collect_item.png"));
-	textures->player = mlx_texture_to_image(game->mlx, mlx_load_png("textures/ply_right.png"));
-	textures->exit = mlx_texture_to_image(game->mlx, mlx_load_png("textures/door.png"));
+	textures->floor = mlx_texture_to_image(game->mlx, floor);
+	textures->collect_item = mlx_texture_to_image(game->mlx, coll);
+	textures->player = mlx_texture_to_image(game->mlx, ply);
+	textures->exit = mlx_texture_to_image(game->mlx, exit);
+	textures->exit_open = mlx_texture_to_image(game->mlx, exit_open);
 	game->textures = textures;
 	
 	mlx_delete_texture(wall);
@@ -46,6 +49,7 @@ void	ft_load_textures(t_game *game)
 	mlx_delete_texture(ply);
 	mlx_delete_texture(coll);
 	mlx_delete_texture(exit);
+	mlx_delete_texture(exit_open);
 }
 
 t_game	*ft_game_init(char *argv)
