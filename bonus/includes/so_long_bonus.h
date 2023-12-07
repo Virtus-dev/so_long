@@ -6,7 +6,7 @@
 /*   By: arigonza <arigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 20:46:25 by arigonza          #+#    #+#             */
-/*   Updated: 2023/11/27 20:47:22 by arigonza         ###   ########.fr       */
+/*   Updated: 2023/12/07 22:10:07 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "../lib/libft/includes/ft_printf.h"
 # include "../lib/libft/includes/get_next_line.h"
 # include "../lib/MLX42/include/MLX42/MLX42.h"
-# include "constants_bonus.h"
+# include "../includes/constants.h"
 
 //------------------------------------
 
@@ -91,10 +91,11 @@ typedef struct s_game
 
 int		ft_win(t_game *game, int current_y, int current_x);
 void	ft_score(t_game *game);
+void	ft_door_open(t_game *game);
 // Utils
 void	error(char *error);
 t_game	*ft_game_init(char *argv);
-void	ft_load_textures(t_game *game);
+void	ft_load_textures_bonus(t_game *game);
 void	ft_get_citem(t_game *game);
 // Map utils
 void	ft_print_map(char ** map);
@@ -115,11 +116,11 @@ void	ft_render_map(t_game *game);
 void	ft_render_player(t_game *game);
 void	ft_render_animation(t_game *param);
 // Player moves
-void	ft_controls(mlx_key_data_t keydata, void *param);
-void	ft_up(t_game *game);
-void	ft_down(t_game *game);
-void	ft_left(t_game *game);
-void	ft_right(t_game *game);
+void	ft_controls_bonus(mlx_key_data_t keydata, void *param);
+void	ft_up_b(t_game *game);
+void	ft_down_b(t_game *game);
+void	ft_left_b(t_game *game);
+void	ft_right_b(t_game *game);
 // Animations
 t_node		*ft_new_img_node(mlx_image_t *image);
 t_animation	*ft_animation_init();

@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arigonza <arigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/12 16:05:26 by arigonza          #+#    #+#             */
-/*   Updated: 2023/11/30 16:56:39 by arigonza         ###   ########.fr       */
+/*   Created: 2023/12/04 19:26:31 by arigonza          #+#    #+#             */
+/*   Updated: 2023/12/07 22:08:22 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
-#include <stdbool.h>
+#include "../includes/so_long_bonus.h"
 
 int32_t	main(int argc, char **argv)
 {
@@ -31,7 +30,7 @@ int32_t	main(int argc, char **argv)
 	ft_render_map(game);
 	ft_render_player(game);
 	// Movement
-	mlx_key_hook(game->mlx, &ft_controls, game);
+	mlx_key_hook(game->mlx, &ft_controls_bonus, game);
 	mlx_loop(game->mlx);
 	return (EXIT_SUCCESS);
 }

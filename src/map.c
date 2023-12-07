@@ -6,7 +6,7 @@
 /*   By: arigonza <arigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 02:29:12 by arigonza          #+#    #+#             */
-/*   Updated: 2023/11/18 22:50:03 by arigonza         ###   ########.fr       */
+/*   Updated: 2023/11/30 17:16:06 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,7 @@ void	ft_check_map(t_game *game)
 	
 	y_size = ft_map_height(game->map);
 	x_size = (int)ft_strlen(game->map[0]);
-	if (y_size > x_size)
+	if (y_size >= x_size)
 		error(MAP_ERROR);
 	game->num_col = y_size;
 	game->num_rows = x_size;

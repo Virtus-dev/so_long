@@ -1,22 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arigonza <arigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/03 07:18:05 by arigonza          #+#    #+#             */
-/*   Updated: 2023/11/30 16:47:12 by arigonza         ###   ########.fr       */
+/*   Created: 2023/12/04 19:52:31 by arigonza          #+#    #+#             */
+/*   Updated: 2023/12/07 22:10:53 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
-
-void error(char *error)
-{
-	ft_printf(error);
-	exit(EXIT_FAILURE);
-}
+#include "bonus/includes/so_long_bonus.h"
 
 void	ft_load_textures(t_game *game)
 {
@@ -50,55 +44,4 @@ void	ft_load_textures(t_game *game)
 	mlx_delete_texture(coll);
 	mlx_delete_texture(exit);
 	mlx_delete_texture(exit_open);
-}
-
-t_game	*ft_game_init(char *argv)
-{
-	t_game		*game;
-	t_player	*player;
-	int			fd;
-	
-	fd = open(argv, O_RDONLY);
-	game = (t_game *)malloc(sizeof(t_game));
-	ft_read_map(game, fd);
-	close(fd);
-	player = (t_player*)malloc(sizeof(t_player));
-	player->x = 0;
-	player->y = 0;
-	player->c_counter = 0;
-	game->moves = 0;
-	game->mlx = NULL;
-	game->player = player;
-	game->textures = NULL;
-
-	return (game);
-}
-
-void	ft_get_citem(t_game *game)
-{
-    int		i;
-
-	i = 0;
-	while (i <= game->total_c)
-	{
-		if (game->textures->collect_item->instances[i].y == game->textures->player->instances[0].y &&
-			game->textures->collect_item->instances[i].x == game->textures->player->instances[0].x)
-		{
-			ft_printf("GOLD!\n");
-			game->textures->collect_item->instances[i].enabled = 0;
-		}
-		i++;
-	}
-}
-
-void	ft_free_all(t_game *game)
-{
-	mlx_delete_image(game->mlx, game->textures->wall);
-	mlx_delete_image(game->mlx, game->textures->collect_item);
-	mlx_delete_image(game->mlx, game->textures->exit);
-	mlx_delete_image(game->mlx, game->textures->player);
-	mlx_delete_image(game->mlx, game->textures->floor);
-
-	ft_free_map(game->map);
-	//mlx_terminate(game->mlx);
 }

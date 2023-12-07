@@ -6,11 +6,11 @@
 /*   By: arigonza <arigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 12:20:09 by arigonza          #+#    #+#             */
-/*   Updated: 2023/11/22 22:29:52 by arigonza         ###   ########.fr       */
+/*   Updated: 2023/11/30 16:52:24 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "bonus/includes/so_long_bonus.h"
 
 t_node	*ft_new_img_node(mlx_image_t *image)
 {

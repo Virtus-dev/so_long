@@ -6,7 +6,7 @@
 /*   By: arigonza <arigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 14:37:43 by arigonza          #+#    #+#             */
-/*   Updated: 2023/11/27 20:54:38 by arigonza         ###   ########.fr       */
+/*   Updated: 2023/11/30 16:46:39 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,25 +21,6 @@
 
 //------------------------------------
 
-typedef struct s_node
-{
-	mlx_image_t		*img;
-	int				x;
-	int				y;
-	struct s_node	*next;
-}	t_node;
-
-/**
- * @brief Struct that holds a list of sprites in order to make an animation.
- * @param img texture passed as an img.( mlx_texture_to_image() )
- * @param next a pointer for the next node of the list of img.
- */
-typedef struct s_animation
-{
-    t_node			*head;
-	int				size;
-}	t_animation;
-
 /**
  * @brief Struct that holds all the player information.
  * @param animation Takes the first node of a list of sprites to make the animation.
@@ -49,7 +30,6 @@ typedef struct s_animation
  */
 typedef struct s_player
 {
-    t_animation	*animation;
     int			x;
     int			y;
 	int			c_counter;
@@ -91,7 +71,6 @@ typedef struct s_game
 
 int		ft_win(t_game *game, int current_y, int current_x);
 void	ft_score(t_game *game);
-void	ft_door_open(t_game *game);
 // Utils
 void	error(char *error);
 t_game	*ft_game_init(char *argv);
@@ -114,17 +93,11 @@ char	**ft_cpymap(char **map, int x_size);
 // Render
 void	ft_render_map(t_game *game);
 void	ft_render_player(t_game *game);
-void	ft_render_animation(t_game *param);
 // Player moves
 void	ft_controls(mlx_key_data_t keydata, void *param);
 void	ft_up(t_game *game);
 void	ft_down(t_game *game);
 void	ft_left(t_game *game);
 void	ft_right(t_game *game);
-// Animations
-t_node		*ft_new_img_node(mlx_image_t *image);
-t_animation	*ft_animation_init();
-void		ft_add_img(t_animation *animation, t_node *img);
-void		ft_iddle_player(t_animation *animation, t_game *game);
 
 #endif

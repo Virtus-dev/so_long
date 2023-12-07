@@ -6,25 +6,25 @@
 /*   By: arigonza <arigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 20:32:55 by arigonza          #+#    #+#             */
-/*   Updated: 2023/11/27 20:36:59 by arigonza         ###   ########.fr       */
+/*   Updated: 2023/12/07 22:08:07 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "bonus/includes/so_long_bonus.h"
 
-void	ft_controls(mlx_key_data_t keydata, void *param)
+void	ft_controls_bonus(mlx_key_data_t keydata, void *param)
 {
     t_game	*game;
 
 	game = param;
 	if (keydata.key == MLX_KEY_W && keydata.action == MLX_RELEASE)
-		ft_up(game);
+		ft_up_b(game);
 	if (keydata.key == MLX_KEY_S && keydata.action == MLX_RELEASE)
-		ft_down(game);
+		ft_down_b(game);
 	if (keydata.key == MLX_KEY_A && keydata.action == MLX_RELEASE)
-		ft_left(game);
+		ft_left_b(game);
 	if (keydata.key == MLX_KEY_D && keydata.action == MLX_RELEASE)
-		ft_right(game);
+		ft_right_b(game);
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_RELEASE)
 	{
 		ft_free_all(game);
@@ -32,7 +32,7 @@ void	ft_controls(mlx_key_data_t keydata, void *param)
 	}
 }
 
-void	ft_up(t_game *game)
+void	ft_up_b(t_game *game)
 {
 	int		currnt_y;
 	int		currnt_x;
@@ -57,7 +57,7 @@ void	ft_up(t_game *game)
 	ft_printf("moves: %d\n", game->moves);
 }
 
-void	ft_down(t_game *game)
+void	ft_down_b(t_game *game)
 {
 	int		currnt_y;
 	int		currnt_x;
@@ -82,7 +82,7 @@ void	ft_down(t_game *game)
 	ft_printf("moves: %d\n", game->moves);
 }
 
-void	ft_left(t_game *game)
+void	ft_left_b(t_game *game)
 {
 	int		currnt_y;
 	int		currnt_x;
@@ -107,7 +107,7 @@ void	ft_left(t_game *game)
 	ft_printf("moves: %d\n", game->moves);
 }
 
-void	ft_right(t_game *game)
+void	ft_right_b(t_game *game)
 {
 	int		currnt_y;
 	int		currnt_x;

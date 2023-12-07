@@ -6,13 +6,13 @@
 #    By: arigonza <arigonza@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/25 13:36:46 by arigonza          #+#    #+#              #
-#    Updated: 2023/11/22 21:42:30 by arigonza         ###   ########.fr        #
+#    Updated: 2023/12/07 22:23:38 by arigonza         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := so_long
 
-BONUS_NAME := so_long_bonus
+BONUS := bonus
 
 CC := gcc
 
@@ -44,16 +44,17 @@ OBJDIR_BONUS := obj_bonus
 SRC = src/main.c src/utils.c src/render.c src/map.c \
 	src/map_utils.c src/ply_moves.c src/win.c
 
-BONUS_SRC = 
+BONUS_SRC = bonus/src/ply_moves_bonus.c bonus/src/win_bonus.c \
+	bonus/src/animations.c bonus/src/main_bonus.c \
 
 OBJ = $(patsubst src/%.c,$(OBJDIR)/%.o, $(SRC))
 
-BONUS_OBJ = $(patsubst src/%.c,$(OBJDIR_BONUS)/%.o,$(BONUS_SRC))
+BONUS_OBJ = $(patsubst bonus/src/%.c,$(OBJDIR_BONUS)/%.o,$(BONUS_SRC))
 
 $(OBJDIR)/%.o : src/%.c | $(OBJDIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-$(OBJDIR_BONUS)/%.o : src/%.c | $(OBJDIR_BONUS)
+$(OBJDIR_BONUS)/%.o : bonus/src/%.c | $(OBJDIR_BONUS)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 all : $(NAME)
@@ -73,19 +74,21 @@ $(MLX42) :
 	@make -s -C lib/MLX42/build
 	@echo "$(GREEN)MLX42 compiled.$(DEF_COLOR)"
 
-$(BONUS_NAME) : $(BONUS_OBJ) $(LIBFT) $(MLX42)
+$(BONUS) : $(OBJ) $(BONUS_OBJ) $(LIBFT) $(MLX42)
 	@echo "$(BLUE)Compiling so_long bonus...$(DEF_COLOR)"
-	@$(CC) $(CFLAGS) -o $@ $^ $(EXTRA)
+	@$(CC) $(CFLAGS) -o $@ $^ -I bonus/includes $(EXTRA)
 	@echo "$(BLUE)so_long bonus compiled.$(DEF_COLOR)"
 
 $(OBJDIR) :
 	@mkdir -p $(OBJDIR)
 
+$(OBJDIR_BONUS) :
+	@mkdir -p $(OBJDIR_BONUS)
+
 clean :
 	@make -s clean -C lib/libft
 	@make -s clean -C lib/MLX42/build
-	@rm -rf $(OBJDIR)
-	
+	@rm -rf $(OBJDIR) $(OBJDIR_BONUS)
 	@echo "$(RED)Objects cleaned...$(DEF_COLOR)"
 
 fclean : clean
@@ -95,6 +98,8 @@ fclean : clean
 	@echo "$(RED)so_long cleaned...$(DEF_COLOR)"
 
 re : fclean all
+
+re_bonus : fclean bonus
 
 # Colors
 
