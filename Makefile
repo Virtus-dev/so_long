@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: arigonza <arigonza@student.42malaga.com    +#+  +:+       +#+         #
+#    By: arigonza < arigonza@student.42malaga.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/25 13:36:46 by arigonza          #+#    #+#              #
-#    Updated: 2023/12/07 22:23:38 by arigonza         ###   ########.fr        #
+#    Updated: 2023/12/16 14:38:10 by arigonza         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := so_long
 
-BONUS := bonus
+BONUS_NAME := so_long_bonus
 
 CC := gcc
 
@@ -41,15 +41,15 @@ OBJDIR := obj
 
 OBJDIR_BONUS := obj_bonus
 
-SRC = src/main.c src/utils.c src/render.c src/map.c \
+SRC = src/utils.c src/render.c src/map.c \
 	src/map_utils.c src/ply_moves.c src/win.c
 
 BONUS_SRC = bonus/src/ply_moves_bonus.c bonus/src/win_bonus.c \
-	bonus/src/animations.c bonus/src/main_bonus.c \
+	bonus/src/animations.c bonus/src/main_bonus.c bonus/src/utils_bonus.c \
 
 OBJ = $(patsubst src/%.c,$(OBJDIR)/%.o, $(SRC))
 
-BONUS_OBJ = $(patsubst bonus/src/%.c,$(OBJDIR_BONUS)/%.o,$(BONUS_SRC))
+BONUS_OBJ = $(patsubst bonus/src/%.c,$(OBJDIR_BONUS)/%.o, $(BONUS_SRC))
 
 $(OBJDIR)/%.o : src/%.c | $(OBJDIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
@@ -61,7 +61,7 @@ all : $(NAME)
 
 $(NAME) : $(OBJ) $(LIBFT) $(MLX42)
 	@echo "$(GREEN)Compiling so_long...$(DEF_COLOR)"
-	@$(CC) $(CFLAGS) -o $@ $^ $(EXTRA) $(FSANITIZE)
+	@$(CC) $(CFLAGS) -o $@ $^ src/main.c $(EXTRA_MAC) $(FSANITIZE)
 	@echo "$(GREEN)so_long ready.$(DEF_COLOR)"
 
 $(LIBFT) :
@@ -74,9 +74,9 @@ $(MLX42) :
 	@make -s -C lib/MLX42/build
 	@echo "$(GREEN)MLX42 compiled.$(DEF_COLOR)"
 
-$(BONUS) : $(OBJ) $(BONUS_OBJ) $(LIBFT) $(MLX42)
+$(BONUS_NAME) : $(LIBFT) $(MLX42) $(OBJ) $(BONUS_OBJ)
 	@echo "$(BLUE)Compiling so_long bonus...$(DEF_COLOR)"
-	@$(CC) $(CFLAGS) -o $@ $^ -I bonus/includes $(EXTRA)
+	@$(CC) $(CFLAGS) -o $@ $^ -I bonus/includes $(EXTRA_MAC) $(FSANITIZE)
 	@echo "$(BLUE)so_long bonus compiled.$(DEF_COLOR)"
 
 $(OBJDIR) :
@@ -99,7 +99,7 @@ fclean : clean
 
 re : fclean all
 
-re_bonus : fclean bonus
+re_bonus : fclean $(BONUS_NAME)
 
 # Colors
 

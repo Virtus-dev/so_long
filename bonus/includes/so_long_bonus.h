@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   so_long_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arigonza <arigonza@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: arigonza < arigonza@student.42malaga.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 20:46:25 by arigonza          #+#    #+#             */
-/*   Updated: 2023/12/07 22:10:07 by arigonza         ###   ########.fr       */
+/*   Updated: 2023/12/16 14:25:51 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_BONUS_H
 # define SO_LONG_BONUS_H
 # include <stdio.h>
-# include "../lib/libft/includes/libft.h"
-# include "../lib/libft/includes/ft_printf.h"
-# include "../lib/libft/includes/get_next_line.h"
-# include "../lib/MLX42/include/MLX42/MLX42.h"
-# include "../includes/constants.h"
+# include "../../lib/libft/includes/libft.h"
+# include "../../lib/libft/includes/ft_printf.h"
+# include "../../lib/libft/includes/get_next_line.h"
+# include "../../lib/MLX42/include/MLX42/MLX42.h"
+# include "../../includes/constants.h"
 
 //------------------------------------
 
@@ -36,22 +36,23 @@ typedef struct s_node
  */
 typedef struct s_animation
 {
-    t_node			*head;
-	int				size;
+	t_node	*head;
+	int		size;
 }	t_animation;
 
 /**
  * @brief Struct that holds all the player information.
- * @param animation Takes the first node of a list of sprites to make the animation.
+ * @param animation Takes the first node of a list
+ *  of sprites to make the animation.
  * @param x Position of the player on the X axis.
  * @param y Position of the player on the X axis.
  * @param iddle Flag to know if the animation must be on iddle or not.
  */
 typedef struct s_player
 {
-    t_animation	*animation;
-    int			x;
-    int			y;
+	t_animation	*animation;
+	int			x;
+	int			y;
 	int			c_counter;
 }	t_player;
 
@@ -64,7 +65,7 @@ typedef struct s_texture
 	mlx_image_t	*player;
 	mlx_image_t	*collect_item;
 	char		indentifier;
-} t_texture;
+}	t_texture;
 
 /**
  * @brief Holds all the important information concerning to the game,
@@ -76,8 +77,8 @@ typedef struct s_texture
  */
 typedef struct s_game
 {
-    mlx_t		*mlx;
-    char		**map;
+	mlx_t		*mlx;
+	char		**map;
 	t_player	*player;
 	t_texture	*textures;
 	int			num_rows;
@@ -89,41 +90,42 @@ typedef struct s_game
 
 //----------------------------------
 
-int		ft_win(t_game *game, int current_y, int current_x);
-void	ft_score(t_game *game);
-void	ft_door_open(t_game *game);
+// Bonus
+int			ft_win_bonus(t_game *game, int current_y, int current_x);
+void		ft_score(t_game *game);
+void		ft_door_open(t_game *game);
 // Utils
-void	error(char *error);
-t_game	*ft_game_init(char *argv);
-void	ft_load_textures_bonus(t_game *game);
-void	ft_get_citem(t_game *game);
+void		error(char *error);
+t_game		*ft_game_init(char *argv);
+void		ft_load_textures_bonus(t_game *game);
+void		ft_get_citem(t_game *game);
 // Map utils
-void	ft_print_map(char ** map);
-void	ft_flood_fill(char **map, int y_position, int x_position);
-void	ft_free_map(char **map);
-void	ft_free_all(t_game *game);
-size_t	ft_map_height(char **map);
-void	ft_set_ply_pos(t_game *game, char** map);
+void		ft_print_map(char **map);
+void		ft_flood_fill(char **map, int y_position, int x_position);
+void		ft_free_map(char **map);
+void		ft_free_all(t_game *game);
+size_t		ft_map_height(char **map);
+void		ft_set_ply_pos(t_game *game, char **map);
 // Map
-int		ft_read_map(t_game *game, int fd);
-void	ft_check_map(t_game *game);
-void	ft_check_walls(t_game *game, size_t y_size, size_t x_size);
-void	ft_check_elements(char **map);
-void	ft_check_valid_path(char **map);
-char	**ft_cpymap(char **map, int x_size);
+int			ft_read_map(t_game *game, int fd);
+void		ft_check_map(t_game *game);
+void		ft_check_walls(t_game *game, size_t y_size, size_t x_size);
+void		ft_check_elements(char **map);
+void		ft_check_valid_path(char **map);
+char		**ft_cpymap(char **map, int x_size);
 // Render
-void	ft_render_map(t_game *game);
-void	ft_render_player(t_game *game);
-void	ft_render_animation(t_game *param);
+void		ft_render_map(t_game *game);
+void		ft_render_player(t_game *game);
+void		ft_render_animation(t_game *param);
 // Player moves
-void	ft_controls_bonus(mlx_key_data_t keydata, void *param);
-void	ft_up_b(t_game *game);
-void	ft_down_b(t_game *game);
-void	ft_left_b(t_game *game);
-void	ft_right_b(t_game *game);
+void		ft_controls_bonus(mlx_key_data_t keydata, void *param);
+void		ft_up_b(t_game *game);
+void		ft_down_b(t_game *game);
+void		ft_left_b(t_game *game);
+void		ft_right_b(t_game *game);
 // Animations
 t_node		*ft_new_img_node(mlx_image_t *image);
-t_animation	*ft_animation_init();
+t_animation	*ft_animation_init(void);
 void		ft_add_img(t_animation *animation, t_node *img);
 void		ft_iddle_player(t_animation *animation, t_game *game);
 

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   win_bonus.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arigonza <arigonza@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: arigonza < arigonza@student.42malaga.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 20:56:48 by arigonza          #+#    #+#             */
-/*   Updated: 2023/12/04 19:38:14 by arigonza         ###   ########.fr       */
+/*   Updated: 2023/12/16 14:25:51 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "bonus/includes/so_long_bonus.h"
+#include "../includes/so_long_bonus.h"
 
-int	ft_win(t_game *game, int current_y, int current_x)
+int	ft_win_bonus(t_game *game, int current_y, int current_x)
 {
 	char	**map;
 	int		c_counter;
@@ -42,7 +42,7 @@ void	ft_door_open(t_game *game)
 	int		y;
 	int		x;
 	char	**map;
-	
+
 	map = game->map;
 	y = 0;
 	while (map[y])

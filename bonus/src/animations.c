@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   animations.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arigonza <arigonza@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: arigonza < arigonza@student.42malaga.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 12:20:09 by arigonza          #+#    #+#             */
-/*   Updated: 2023/11/30 16:52:24 by arigonza         ###   ########.fr       */
+/*   Updated: 2023/12/16 14:25:43 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "bonus/includes/so_long_bonus.h"
+#include "../includes/so_long_bonus.h"
 
 t_node	*ft_new_img_node(mlx_image_t *image)
 {
 	t_node	*node;
-	
+
 	node = (t_node *)malloc(sizeof(t_node));
 	if (!node)
 		return (free(node), NULL);
@@ -24,23 +24,22 @@ t_node	*ft_new_img_node(mlx_image_t *image)
 	return (node);
 }
 
-t_animation	*ft_animation_init()
+t_animation	*ft_animation_init(void)
 {
-	t_animation *animation;
-	
-	animation = (t_animation*)malloc(sizeof(t_animation));
+	t_animation	*animation;
+
+	animation = (t_animation *) malloc(sizeof(t_animation));
 	if (!animation)
 		return (free(animation), NULL);
 	animation->head = NULL;
 	animation->size = 0;
-
 	return (animation);
 }
 
 void	ft_add_img(t_animation *animation, t_node *img)
 {
 	t_node	*current;
-	
+
 	if (!animation || !img)
 		return ;
 	if (!animation->head)

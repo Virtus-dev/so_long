@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arigonza <arigonza@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: arigonza < arigonza@student.42malaga.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 02:29:12 by arigonza          #+#    #+#             */
-/*   Updated: 2023/11/30 17:16:06 by arigonza         ###   ########.fr       */
+/*   Updated: 2023/12/16 15:01:52 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
  #include "../includes/so_long.h"
 
 /**
- * @brief Reads the map from a file descriptor and saves it on the game->map property.
- * 
+ * @brief Reads the map from a file descriptor and
+ * saves it on the game->map property.
  * @param game Struct that holds all the game related information.
  * @param fd file descriptor from wich to read.
  * @return int number of rows from the map readed.
@@ -43,7 +43,6 @@ int	ft_read_map(t_game *game, int fd)
 	return (free(line), free(tmp), num_rows);
 }
 
-
 /**
  * @brief Checks if the map is surrounded by walls 
  * and also if there's any gap into.
@@ -54,7 +53,7 @@ void	ft_check_walls(t_game *game, size_t y_size, size_t x_size)
 {
 	int	i;
 	int	j;
-	
+
 	i = 0;
 	j = 0;
 	while (game->map[i])
@@ -62,7 +61,7 @@ void	ft_check_walls(t_game *game, size_t y_size, size_t x_size)
 		if (ft_strlen(game->map[i]) != x_size)
 			error(MAP_ERROR);
 		while (game->map[i][j])
-		{		
+		{
 			if (game->map[0][j] != WALL)
 				error(MAP_ERROR);
 			if (game->map[y_size - 1][j] != WALL)

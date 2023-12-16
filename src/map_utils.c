@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arigonza <arigonza@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: arigonza < arigonza@student.42malaga.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 12:24:01 by arigonza          #+#    #+#             */
-/*   Updated: 2023/11/16 17:33:07 by arigonza         ###   ########.fr       */
+/*   Updated: 2023/12/16 15:16:07 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	**ft_cpymap(char **map, int x_size)
 
 size_t	ft_map_height(char **map)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (map[i])
@@ -83,7 +83,6 @@ void	ft_flood_fill(char **map, int y_position, int x_position)
 	ft_flood_fill(map, y_position, x_position - 1);
 }
 
-/*
 void	ft_print_map(char **map)
 {
 	int	y;
@@ -96,11 +95,11 @@ void	ft_print_map(char **map)
 		while (map[y][x])
 			ft_printf("%c", map[y][x++]);
 		ft_printf("\n");
-		y++;		
+		y++;
 	}
 }
-*/
-void	ft_set_ply_pos(t_game *game, char** map)
+
+void	ft_set_ply_pos(t_game *game, char **map)
 {
 	int	y;
 	int	x;

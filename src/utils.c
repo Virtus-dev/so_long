@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arigonza <arigonza@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: arigonza < arigonza@student.42malaga.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 07:18:05 by arigonza          #+#    #+#             */
-/*   Updated: 2023/11/30 16:47:12 by arigonza         ###   ########.fr       */
+/*   Updated: 2023/12/16 15:11:12 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-void error(char *error)
+void	error(char *error)
 {
 	ft_printf(error);
 	exit(EXIT_FAILURE);
@@ -57,7 +57,7 @@ t_game	*ft_game_init(char *argv)
 	t_game		*game;
 	t_player	*player;
 	int			fd;
-	
+
 	fd = open(argv, O_RDONLY);
 	game = (t_game *)malloc(sizeof(t_game));
 	ft_read_map(game, fd);
@@ -70,13 +70,12 @@ t_game	*ft_game_init(char *argv)
 	game->mlx = NULL;
 	game->player = player;
 	game->textures = NULL;
-
 	return (game);
 }
 
 void	ft_get_citem(t_game *game)
 {
-    int		i;
+	int	i;
 
 	i = 0;
 	while (i <= game->total_c)
@@ -98,7 +97,5 @@ void	ft_free_all(t_game *game)
 	mlx_delete_image(game->mlx, game->textures->exit);
 	mlx_delete_image(game->mlx, game->textures->player);
 	mlx_delete_image(game->mlx, game->textures->floor);
-
 	ft_free_map(game->map);
-	//mlx_terminate(game->mlx);
 }
