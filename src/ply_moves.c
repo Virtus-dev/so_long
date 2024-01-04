@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ply_moves.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arigonza <arigonza@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: arigonza < arigonza@student.42malaga.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 23:22:10 by arigonza          #+#    #+#             */
-/*   Updated: 2023/11/27 20:38:24 by arigonza         ###   ########.fr       */
+/*   Updated: 2024/01/04 16:07:39 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void	ft_right(t_game *game)
 	currnt_y = game->player->y;
 	currnt_x = game->player->x;
 	map = game->map;
-	if (map[currnt_y][currnt_x + 1] == WALL || (map[currnt_y][currnt_x + 1] == EXIT && !ft_win(game, currnt_y, currnt_x +1)))
+	if (map[currnt_y][currnt_x + 1] == WALL || (map[currnt_y][currnt_x + 1] == EXIT && !ft_win(game, currnt_y, currnt_x + 1)))
 	 	return ;
 	game->textures->player->instances[0].x += 32;
 	if (map[currnt_y][currnt_x + 1] == COLLECT_ITEM)

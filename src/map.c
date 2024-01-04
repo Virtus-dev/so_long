@@ -6,7 +6,7 @@
 /*   By: arigonza < arigonza@student.42malaga.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 02:29:12 by arigonza          #+#    #+#             */
-/*   Updated: 2023/12/16 15:01:52 by arigonza         ###   ########.fr       */
+/*   Updated: 2024/01/04 17:44:54 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	ft_check_elements(char **map)
 	int	ply;
 	int	c;
 	int	exits;
-	
+
 	ply = 0;
 	c = 0;
 	exits = 0;

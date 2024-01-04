@@ -6,7 +6,7 @@
 #    By: arigonza < arigonza@student.42malaga.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/25 13:36:46 by arigonza          #+#    #+#              #
-#    Updated: 2023/12/16 14:38:10 by arigonza         ###   ########.fr        #
+#    Updated: 2024/01/04 18:40:35 by arigonza         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ BONUS_NAME := so_long_bonus
 
 CC := gcc
 
-CFLAGS := -Wall -Wextra -Werror
+CFLAGS := -Wall -Wextra -Werror -g
 
 FSANITIZE := -fsanitize=address -g3 -O3
 
@@ -46,6 +46,7 @@ SRC = src/utils.c src/render.c src/map.c \
 
 BONUS_SRC = bonus/src/ply_moves_bonus.c bonus/src/win_bonus.c \
 	bonus/src/animations.c bonus/src/main_bonus.c bonus/src/utils_bonus.c \
+	bonus/src/render_bonus.c \
 
 OBJ = $(patsubst src/%.c,$(OBJDIR)/%.o, $(SRC))
 
@@ -61,7 +62,7 @@ all : $(NAME)
 
 $(NAME) : $(OBJ) $(LIBFT) $(MLX42)
 	@echo "$(GREEN)Compiling so_long...$(DEF_COLOR)"
-	@$(CC) $(CFLAGS) -o $@ $^ src/main.c $(EXTRA_MAC) $(FSANITIZE)
+	@$(CC) $(CFLAGS) -o $@ $^ src/main.c $(EXTRA_MAC)
 	@echo "$(GREEN)so_long ready.$(DEF_COLOR)"
 
 $(LIBFT) :
@@ -76,7 +77,7 @@ $(MLX42) :
 
 $(BONUS_NAME) : $(LIBFT) $(MLX42) $(OBJ) $(BONUS_OBJ)
 	@echo "$(BLUE)Compiling so_long bonus...$(DEF_COLOR)"
-	@$(CC) $(CFLAGS) -o $@ $^ -I bonus/includes $(EXTRA_MAC) $(FSANITIZE)
+	@$(CC) $(CFLAGS) -o $@ $^ -I bonus/includes $(EXTRA_MAC)
 	@echo "$(BLUE)so_long bonus compiled.$(DEF_COLOR)"
 
 $(OBJDIR) :

@@ -6,7 +6,7 @@
 /*   By: arigonza < arigonza@student.42malaga.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 12:24:01 by arigonza          #+#    #+#             */
-/*   Updated: 2023/12/16 15:16:07 by arigonza         ###   ########.fr       */
+/*   Updated: 2024/01/04 17:39:12 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	ft_flood_fill(char **map, int y_position, int x_position)
 		return ;
 	if (map[y_position][x_position] == EXIT || map[y_position][x_position] == COLLECT_ITEM)
 		map[y_position][x_position] = '0';
-		
+
 	map[y_position][x_position] = 'F';
 	ft_flood_fill(map, y_position + 1, x_position);
 	ft_flood_fill(map, y_position - 1, x_position);

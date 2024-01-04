@@ -6,7 +6,7 @@
 /*   By: arigonza < arigonza@student.42malaga.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 20:46:25 by arigonza          #+#    #+#             */
-/*   Updated: 2023/12/16 14:25:51 by arigonza         ###   ########.fr       */
+/*   Updated: 2024/01/04 18:46:43 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ typedef struct s_texture
 	mlx_image_t	*exit_open;
 	mlx_image_t	*player;
 	mlx_image_t	*collect_item;
-	char		indentifier;
+	mlx_image_t	*enemy;
 }	t_texture;
 
 /**
@@ -98,12 +98,13 @@ void		ft_door_open(t_game *game);
 void		error(char *error);
 t_game		*ft_game_init(char *argv);
 void		ft_load_textures_bonus(t_game *game);
+void		ft_load_textures(t_game *game);
 void		ft_get_citem(t_game *game);
+void		ft_free_all_b(t_game *game);
 // Map utils
 void		ft_print_map(char **map);
 void		ft_flood_fill(char **map, int y_position, int x_position);
 void		ft_free_map(char **map);
-void		ft_free_all(t_game *game);
 size_t		ft_map_height(char **map);
 void		ft_set_ply_pos(t_game *game, char **map);
 // Map
@@ -114,7 +115,8 @@ void		ft_check_elements(char **map);
 void		ft_check_valid_path(char **map);
 char		**ft_cpymap(char **map, int x_size);
 // Render
-void		ft_render_map(t_game *game);
+void		ft_dead(t_game *game, int current_y, int current_x);
+void		ft_render_map_bonus(t_game *game);
 void		ft_render_player(t_game *game);
 void		ft_render_animation(t_game *param);
 // Player moves

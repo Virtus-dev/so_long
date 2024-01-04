@@ -6,7 +6,7 @@
 /*   By: arigonza < arigonza@student.42malaga.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 20:32:55 by arigonza          #+#    #+#             */
-/*   Updated: 2023/12/16 15:19:14 by arigonza         ###   ########.fr       */
+/*   Updated: 2024/01/04 18:48:09 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,12 @@ void	ft_controls_bonus(mlx_key_data_t keydata, void *param)
 		ft_right_b(game);
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_RELEASE)
 	{
-		ft_free_all(game);
+		ft_free_all_b(game);
 		mlx_close_window(game->mlx);
 	}
+	ft_printf("c_counter : %d\n", game->player->c_counter);
+	if (game->player->c_counter == 0)
+		ft_door_open(game);
 }
 
 void	ft_up_b(t_game *game)
@@ -38,20 +41,20 @@ void	ft_up_b(t_game *game)
 	int		currnt_x;
 	char	**map;
 
-	currnt_y = game->player->y;
-	currnt_x = game->player->x;
+	currnt_y = game->textures->player->instances[0].y / 32;
+	currnt_x = game->textures->player->instances[0].x / 32;
 	map = game->map;
-	ft_printf("map[%d][%d] = %d\n", (currnt_y - 1), currnt_x, map[currnt_y - 1][currnt_x]);
-	if (map[currnt_y -1][currnt_x] == WALL || (map[currnt_y -1][currnt_x] == EXIT && !ft_win_bonus(game, currnt_y - 1, currnt_x)))
-	 	return ;
+	if (map[currnt_y -1][currnt_x] == WALL
+	|| (map[currnt_y -1][currnt_x] == EXIT
+	&& !ft_win_bonus(game, currnt_y - 1, currnt_x)))
+		return ;
 	game->textures->player->instances[0].y -= 32;
-	ft_printf("After moving the player\n");
 	if (map[currnt_y - 1][currnt_x] == COLLECT_ITEM)
 	{
 		game->player->c_counter--;
 		ft_get_citem(game);
 	}
-	ft_printf("After checking if there's an item\n");
+	ft_dead(game, currnt_y - 1, currnt_x);
 	game->map[currnt_y][currnt_x] = '0';
 	game->map[currnt_y - 1][currnt_x] = PLAYER;
 	game->player->y--;
@@ -66,18 +69,20 @@ void	ft_down_b(t_game *game)
 	int		currnt_x;
 	char	**map;
 
-	currnt_y = game->player->y;
-	currnt_x = game->player->x;
+	currnt_y = game->textures->player->instances[0].y / 32;
+	currnt_x = game->textures->player->instances[0].x / 32;
 	map = game->map;
-	ft_printf("map[%d][%d] = %d\n", (currnt_y + 1), currnt_x, map[currnt_y + 1][currnt_x]);
-	if (map[currnt_y + 1][currnt_x] == WALL || (map[currnt_y + 1][currnt_x] == EXIT && !ft_win_bonus(game, currnt_y + 1, currnt_x)))
-	 	return ;
+	if (map[currnt_y + 1][currnt_x] == WALL
+	|| (map[currnt_y + 1][currnt_x] == EXIT
+	&& !ft_win_bonus(game, currnt_y + 1, currnt_x)))
+		return ;
 	game->textures->player->instances[0].y += 32;
 	if (map[currnt_y + 1][currnt_x] == COLLECT_ITEM)
 	{
 		game->player->c_counter--;
 		ft_get_citem(game);
 	}
+	ft_dead(game, currnt_y + 1, currnt_x);
 	game->map[currnt_y][currnt_x] = '0';
 	game->map[currnt_y + 1][currnt_x] = PLAYER;
 	game->player->y++;
@@ -92,18 +97,20 @@ void	ft_left_b(t_game *game)
 	int		currnt_x;
 	char	**map;
 
-	currnt_y = game->player->y;
-	currnt_x = game->player->x;
+	currnt_y = game->textures->player->instances[0].y / 32;
+	currnt_x = game->textures->player->instances[0].x / 32;
 	map = game->map;
-	ft_printf("map[%d][%d] = %d\n", currnt_y, currnt_x - 1, map[currnt_y][currnt_x - 1]);
-	if (map[currnt_y][currnt_x - 1] == WALL || (map[currnt_y][currnt_x - 1] == EXIT && !ft_win_bonus(game, currnt_y, currnt_x -1)))
-	 	return ;
+	if (map[currnt_y][currnt_x - 1] == WALL
+	|| (map[currnt_y][currnt_x - 1] == EXIT 
+	&& !ft_win_bonus(game, currnt_y, currnt_x -1)))
+		return ;
 	game->textures->player->instances[0].x -= 32;
 	if (map[currnt_y][currnt_x - 1] == COLLECT_ITEM)
 	{
 		game->player->c_counter--;
 		ft_get_citem(game);
 	}
+	ft_dead(game, currnt_y, currnt_x - 1);
 	game->map[currnt_y][currnt_x] = '0';
 	game->map[currnt_y][currnt_x - 1] = PLAYER;
 	game->player->x--;
@@ -118,18 +125,20 @@ void	ft_right_b(t_game *game)
 	int		currnt_x;
 	char	**map;
 
-	currnt_y = game->player->y;
-	currnt_x = game->player->x;
+	currnt_y = game->textures->player->instances[0].y / 32;
+	currnt_x = game->textures->player->instances[0].x / 32;
 	map = game->map;
-	ft_printf("map[%d][%d] = %d\n", (currnt_y - 1), currnt_x, map[currnt_y][currnt_x + 1]);
-	if (map[currnt_y][currnt_x + 1] == WALL || (map[currnt_y][currnt_x + 1] == EXIT && !ft_win_bonus(game, currnt_y, currnt_x +1)))
-	 	return ;
+	if (map[currnt_y][currnt_x + 1] == WALL
+		|| (map[currnt_y][currnt_x + 1]
+		== EXIT && !ft_win_bonus(game, currnt_y, currnt_x + 1)))
+		return ;
 	game->textures->player->instances[0].x += 32;
 	if (map[currnt_y][currnt_x + 1] == COLLECT_ITEM)
 	{
 		game->player->c_counter--;
 		ft_get_citem(game);
 	}
+	ft_dead(game, currnt_y, currnt_x + 1);
 	game->map[currnt_y][currnt_x] = '0';
 	game->map[currnt_y][currnt_x + 1] = PLAYER;
 	game->player->x++;
