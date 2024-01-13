@@ -6,7 +6,7 @@
 /*   By: arigonza < arigonza@student.42malaga.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 07:18:05 by arigonza          #+#    #+#             */
-/*   Updated: 2024/01/04 18:45:23 by arigonza         ###   ########.fr       */
+/*   Updated: 2024/01/13 13:21:51 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ void	ft_get_citem(t_game *game)
 	while (i <= game->total_c)
 	{
 		if (game->textures->collect_item->instances[i].y
-			== game->textures->player->instances[0].y 
-			&& game->textures->collect_item->instances[i].x 
+			== game->textures->player->instances[0].y
+			&& game->textures->collect_item->instances[i].x
 			== game->textures->player->instances[0].x)
 		{
 			ft_printf("GOLD!\n");

@@ -6,7 +6,7 @@
 /*   By: arigonza < arigonza@student.42malaga.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 12:24:01 by arigonza          #+#    #+#             */
-/*   Updated: 2024/01/04 17:39:12 by arigonza         ###   ########.fr       */
+/*   Updated: 2024/01/13 13:21:15 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ char	**ft_cpymap(char **map, int x_size)
 	int		y;
 	int		x;
 
-	map_cpy = (char**)malloc(((int)ft_map_height(map) + 1) * sizeof(char*));
+	map_cpy = (char **)malloc(((int)ft_map_height(map) + 1) * sizeof(char *));
 	if (!map_cpy)
 		return (free(map_cpy), error(MAPCPY_ERROR), NULL);
 	y = 0;
 	while (map[y])
 	{
 		x = 0;
-		map_cpy[y] = (char*)malloc(x_size * sizeof(char));
+		map_cpy[y] = (char *)malloc(x_size * sizeof(char));
 		if (!map_cpy[y])
 			return (ft_free_map(map), NULL);
 		while (map[y][x])
@@ -61,7 +61,8 @@ void	ft_free_map(char **map)
 }
 
 /**
- * @brief Looks for the positions nearby and convert 'C' and 'E' into '0', and later on, into 'F'.
+ * @brief Looks for the positions nearby
+ * and convert 'C' and 'E' into '0', and later on, into 'F'.
  * We'll use it later to find a valid path looking for the 'F' in the map.
  * 
  * @param map
@@ -70,33 +71,17 @@ void	ft_free_map(char **map)
  */
 void	ft_flood_fill(char **map, int y_position, int x_position)
 {
-	if (x_position < 0 || y_position < 0 ||
-		map[y_position][x_position] == WALL || map[y_position][x_position] == 'F')
+	if (x_position < 0 || y_position < 0
+		|| map[y_position][x_position] == WALL
+			|| map[y_position][x_position] == 'F')
 		return ;
-	if (map[y_position][x_position] == EXIT || map[y_position][x_position] == COLLECT_ITEM)
+	if (map[y_position][x_position] == COLLECT_ITEM)
 		map[y_position][x_position] = '0';
-
 	map[y_position][x_position] = 'F';
 	ft_flood_fill(map, y_position + 1, x_position);
 	ft_flood_fill(map, y_position - 1, x_position);
 	ft_flood_fill(map, y_position, x_position + 1);
 	ft_flood_fill(map, y_position, x_position - 1);
-}
-
-void	ft_print_map(char **map)
-{
-	int	y;
-	int	x;
-
-	y = 0;
-	while (map[y])
-	{
-		x = 0;
-		while (map[y][x])
-			ft_printf("%c", map[y][x++]);
-		ft_printf("\n");
-		y++;
-	}
 }
 
 void	ft_set_ply_pos(t_game *game, char **map)

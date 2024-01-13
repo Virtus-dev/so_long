@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   win.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arigonza <arigonza@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: arigonza < arigonza@student.42malaga.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 13:30:12 by arigonza          #+#    #+#             */
-/*   Updated: 2023/11/30 16:50:04 by arigonza         ###   ########.fr       */
+/*   Updated: 2024/01/13 17:40:58 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,23 @@ int	ft_win(t_game *game, int current_y, int current_x)
 	if (map[current_y][current_x] == EXIT && c_counter == 0)
 		return (ft_free_all(game), mlx_close_window(game->mlx), 1);
 	return (0);
+}
+
+void	ft_check_micromap(t_game *game, char **map)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	while (map[y])
+	{
+		x = 0;
+		while (map[y][x])
+		{
+			if (game->player->x - 1 == WALL && game->player->x + 1 == WALL
+				&& game->player->y - 1 == WALL)
+				if (game->player->y + 1 == EXIT && game->player->y + 2 == COLLECT_ITEM)
+					error(MAP_ERROR);
+		}
+	}
 }

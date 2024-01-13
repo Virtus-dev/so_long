@@ -6,7 +6,7 @@
 #    By: arigonza < arigonza@student.42malaga.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/25 13:36:46 by arigonza          #+#    #+#              #
-#    Updated: 2024/01/04 18:40:35 by arigonza         ###   ########.fr        #
+#    Updated: 2024/01/13 13:51:02 by arigonza         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,14 +24,16 @@ LIBFT = lib/libft/libft.a
 
 MLX42 = ./lib/MLX42/build/libmlx42.a
 
-ML42_INSTALL := ./lib/MLX42
+MLX42_INSTALL := mlx_install
+
+MLX42_DIR := ./lib/MLX42
 
 $(MLX42_INSTALL) :
-	@echo $(BLUE)INSTALLING MLX42...$(DEF_COLOR)
-	@cd $(ML42_DIR)
+	@echo $(YELLOW)INSTALLING MLX42...$(DEF_COLOR)
+	@cd $(MLX42_DIR)
 	@cmake -B build
 	@cmake --build build -j4
-	@echo $(BLUE)MLX42 INSTALLED.$(DEF_COLOR)
+	@echo $(GREEN)MLX42 INSTALLED.$(DEF_COLOR)
 
 EXTRA := -I include -ldl -lX11 -lXext -lglfw -pthread -lm
 
@@ -45,7 +47,7 @@ SRC = src/utils.c src/render.c src/map.c \
 	src/map_utils.c src/ply_moves.c src/win.c
 
 BONUS_SRC = bonus/src/ply_moves_bonus.c bonus/src/win_bonus.c \
-	bonus/src/animations.c bonus/src/main_bonus.c bonus/src/utils_bonus.c \
+	bonus/src/main_bonus.c bonus/src/utils_bonus.c \
 	bonus/src/render_bonus.c \
 
 OBJ = $(patsubst src/%.c,$(OBJDIR)/%.o, $(SRC))
@@ -61,24 +63,24 @@ $(OBJDIR_BONUS)/%.o : bonus/src/%.c | $(OBJDIR_BONUS)
 all : $(NAME)
 
 $(NAME) : $(OBJ) $(LIBFT) $(MLX42)
-	@echo "$(GREEN)Compiling so_long...$(DEF_COLOR)"
-	@$(CC) $(CFLAGS) -o $@ $^ src/main.c $(EXTRA_MAC)
+	@echo "$(YELLOW)Compiling so_long...$(DEF_COLOR)"
+	@$(CC) $(CFLAGS) -o $@ $^ src/main.c $(EXTRA_MAC) 
 	@echo "$(GREEN)so_long ready.$(DEF_COLOR)"
 
 $(LIBFT) :
-	@echo "$(GREEN)Compiling libft...$(DEF_COLOR)"
+	@echo "$(YELLOW)Compiling libft...$(DEF_COLOR)"
 	@make -s -C lib/libft
 	@echo "$(GREEN)Libft compiled.$(DEF_COLOR)"
 
 $(MLX42) : 
-	@echo "$(GREEN)Compiling MLX42...$(DEF_COLOR)"
+	@echo "$(YELLOW)Compiling MLX42...$(DEF_COLOR)"
 	@make -s -C lib/MLX42/build
 	@echo "$(GREEN)MLX42 compiled.$(DEF_COLOR)"
 
 $(BONUS_NAME) : $(LIBFT) $(MLX42) $(OBJ) $(BONUS_OBJ)
-	@echo "$(BLUE)Compiling so_long bonus...$(DEF_COLOR)"
+	@echo "$(YELLOW)Compiling so_long bonus...$(DEF_COLOR)"
 	@$(CC) $(CFLAGS) -o $@ $^ -I bonus/includes $(EXTRA_MAC)
-	@echo "$(BLUE)so_long bonus compiled.$(DEF_COLOR)"
+	@echo "$(GREEN)so_long bonus compiled.$(DEF_COLOR)"
 
 $(OBJDIR) :
 	@mkdir -p $(OBJDIR)
@@ -101,6 +103,16 @@ fclean : clean
 re : fclean all
 
 re_bonus : fclean $(BONUS_NAME)
+
+norm :
+	@echo "$(CYAN)Norminette src/$(GREEN)"
+	@norminette src/
+	@echo "$(CYAN)Norminette bonus/src$(GREEN)"
+	@norminette bonus/src/
+	@echo "$(CYAN)Norminette includes/ & bonus/includes/$(GREEN)"
+	@norminette includes/
+	@norminette bonus/includes/
+	@echo "$(DEF_COLOR)"
 
 # Colors
 

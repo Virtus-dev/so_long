@@ -6,11 +6,11 @@
 /*   By: arigonza < arigonza@student.42malaga.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 02:29:12 by arigonza          #+#    #+#             */
-/*   Updated: 2024/01/04 17:44:54 by arigonza         ###   ########.fr       */
+/*   Updated: 2024/01/13 17:20:50 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
- #include "../includes/so_long.h"
+#include "../includes/so_long.h"
 
 /**
  * @brief Reads the map from a file descriptor and
@@ -29,7 +29,7 @@ int	ft_read_map(t_game *game, int fd)
 	line = get_next_line(fd);
 	tmp = NULL;
 	if (!line)
-		return (error(READING_ERROR), free(line), 0);	
+		return (error(READING_ERROR), free(line), 0);
 	while (line)
 	{
 		tmp = ft_strjoin_gnl(tmp, line);
@@ -88,11 +88,11 @@ void	ft_check_elements(char **map)
 	ply = 0;
 	c = 0;
 	exits = 0;
-	y = 0;
-	while (map[y])
+	y = -1;
+	while (map[++y])
 	{
-		x = 0;
-		while (map[y][x])
+		x = -1;
+		while (map[y][++x])
 		{
 			if (map[y][x] == PLAYER)
 				ply++;
@@ -100,9 +100,7 @@ void	ft_check_elements(char **map)
 				c++;
 			if (map[y][x] == EXIT)
 				exits++;
-			x++;
 		}
-		y++;
 	}
 	if (ply != 1 || c < 1 || exits != 1)
 		error(MAP_ERROR);
@@ -142,7 +140,7 @@ void	ft_check_map(t_game *game)
 	char	**mapcpy;
 	size_t	x_size;
 	size_t	y_size;
-	
+
 	y_size = ft_map_height(game->map);
 	x_size = (int)ft_strlen(game->map[0]);
 	if (y_size >= x_size)

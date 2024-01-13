@@ -6,7 +6,7 @@
 /*   By: arigonza < arigonza@student.42malaga.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 20:32:55 by arigonza          #+#    #+#             */
-/*   Updated: 2024/01/04 18:48:09 by arigonza         ###   ########.fr       */
+/*   Updated: 2024/01/13 13:23:02 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	ft_controls_bonus(mlx_key_data_t keydata, void *param)
 		ft_free_all_b(game);
 		mlx_close_window(game->mlx);
 	}
-	ft_printf("c_counter : %d\n", game->player->c_counter);
 	if (game->player->c_counter == 0)
 		ft_door_open(game);
 }
@@ -52,7 +51,7 @@ void	ft_up_b(t_game *game)
 	if (map[currnt_y - 1][currnt_x] == COLLECT_ITEM)
 	{
 		game->player->c_counter--;
-		ft_get_citem(game);
+		ft_get_citem_b(game);
 	}
 	ft_dead(game, currnt_y - 1, currnt_x);
 	game->map[currnt_y][currnt_x] = '0';
@@ -60,7 +59,6 @@ void	ft_up_b(t_game *game)
 	game->player->y--;
 	game->moves++;
 	ft_score(game);
-	ft_printf("moves: %d\n", game->moves);
 }
 
 void	ft_down_b(t_game *game)
@@ -80,7 +78,7 @@ void	ft_down_b(t_game *game)
 	if (map[currnt_y + 1][currnt_x] == COLLECT_ITEM)
 	{
 		game->player->c_counter--;
-		ft_get_citem(game);
+		ft_get_citem_b(game);
 	}
 	ft_dead(game, currnt_y + 1, currnt_x);
 	game->map[currnt_y][currnt_x] = '0';
@@ -88,7 +86,6 @@ void	ft_down_b(t_game *game)
 	game->player->y++;
 	game->moves++;
 	ft_score(game);
-	ft_printf("moves: %d\n", game->moves);
 }
 
 void	ft_left_b(t_game *game)
@@ -101,14 +98,14 @@ void	ft_left_b(t_game *game)
 	currnt_x = game->textures->player->instances[0].x / 32;
 	map = game->map;
 	if (map[currnt_y][currnt_x - 1] == WALL
-	|| (map[currnt_y][currnt_x - 1] == EXIT 
+	|| (map[currnt_y][currnt_x - 1] == EXIT
 	&& !ft_win_bonus(game, currnt_y, currnt_x -1)))
 		return ;
 	game->textures->player->instances[0].x -= 32;
 	if (map[currnt_y][currnt_x - 1] == COLLECT_ITEM)
 	{
 		game->player->c_counter--;
-		ft_get_citem(game);
+		ft_get_citem_b(game);
 	}
 	ft_dead(game, currnt_y, currnt_x - 1);
 	game->map[currnt_y][currnt_x] = '0';
@@ -116,7 +113,6 @@ void	ft_left_b(t_game *game)
 	game->player->x--;
 	game->moves++;
 	ft_score(game);
-	ft_printf("moves: %d\n", game->moves);
 }
 
 void	ft_right_b(t_game *game)
@@ -136,7 +132,7 @@ void	ft_right_b(t_game *game)
 	if (map[currnt_y][currnt_x + 1] == COLLECT_ITEM)
 	{
 		game->player->c_counter--;
-		ft_get_citem(game);
+		ft_get_citem_b(game);
 	}
 	ft_dead(game, currnt_y, currnt_x + 1);
 	game->map[currnt_y][currnt_x] = '0';
@@ -144,5 +140,4 @@ void	ft_right_b(t_game *game)
 	game->player->x++;
 	game->moves++;
 	ft_score(game);
-	ft_printf("moves: %d\n", game->moves);
 }

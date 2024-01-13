@@ -6,7 +6,7 @@
 /*   By: arigonza < arigonza@student.42malaga.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 23:22:10 by arigonza          #+#    #+#             */
-/*   Updated: 2024/01/04 16:07:39 by arigonza         ###   ########.fr       */
+/*   Updated: 2024/01/13 12:47:01 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_controls(mlx_key_data_t keydata, void *param)
 {
-    t_game	*game;
+	t_game	*game;
 
 	game = param;
 	if (keydata.key == MLX_KEY_W && keydata.action == MLX_RELEASE)
@@ -41,8 +41,9 @@ void	ft_up(t_game *game)
 	currnt_y = game->player->y;
 	currnt_x = game->player->x;
 	map = game->map;
-	if (map[currnt_y -1][currnt_x] == WALL || (map[currnt_y -1][currnt_x] == EXIT && !ft_win(game, currnt_y - 1, currnt_x)))
-	 	return ;
+	if (map[currnt_y - 1][currnt_x] == WALL || (map[currnt_y
+			- 1][currnt_x] == EXIT && !ft_win(game, currnt_y - 1, currnt_x)))
+		return ;
 	game->textures->player->instances[0].y -= 32;
 	if (map[currnt_y - 1][currnt_x] == COLLECT_ITEM)
 	{
@@ -65,8 +66,9 @@ void	ft_down(t_game *game)
 	currnt_y = game->player->y;
 	currnt_x = game->player->x;
 	map = game->map;
-	if (map[currnt_y + 1][currnt_x] == WALL || (map[currnt_y + 1][currnt_x] == EXIT && !ft_win(game, currnt_y + 1, currnt_x)))
-	 	return ;
+	if (map[currnt_y + 1][currnt_x] == WALL || (map[currnt_y
+			+ 1][currnt_x] == EXIT && !ft_win(game, currnt_y + 1, currnt_x)))
+		return ;
 	game->textures->player->instances[0].y += 32;
 	if (map[currnt_y + 1][currnt_x] == COLLECT_ITEM)
 	{
@@ -89,8 +91,9 @@ void	ft_left(t_game *game)
 	currnt_y = game->player->y;
 	currnt_x = game->player->x;
 	map = game->map;
-	if (map[currnt_y][currnt_x - 1] == WALL || (map[currnt_y][currnt_x - 1] == EXIT && !ft_win(game, currnt_y, currnt_x -1)))
-	 	return ;
+	if (map[currnt_y][currnt_x - 1] == WALL || (map[currnt_y][currnt_x
+			- 1] == EXIT && !ft_win(game, currnt_y, currnt_x - 1)))
+		return ;
 	game->textures->player->instances[0].x -= 32;
 	if (map[currnt_y][currnt_x - 1] == COLLECT_ITEM)
 	{
@@ -113,8 +116,9 @@ void	ft_right(t_game *game)
 	currnt_y = game->player->y;
 	currnt_x = game->player->x;
 	map = game->map;
-	if (map[currnt_y][currnt_x + 1] == WALL || (map[currnt_y][currnt_x + 1] == EXIT && !ft_win(game, currnt_y, currnt_x + 1)))
-	 	return ;
+	if (map[currnt_y][currnt_x + 1] == WALL || (map[currnt_y][currnt_x + 1]
+		== EXIT && !ft_win(game, currnt_y, currnt_x + 1)))
+		return ;
 	game->textures->player->instances[0].x += 32;
 	if (map[currnt_y][currnt_x + 1] == COLLECT_ITEM)
 	{
