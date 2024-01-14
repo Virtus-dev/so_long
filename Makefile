@@ -6,7 +6,7 @@
 #    By: arigonza < arigonza@student.42malaga.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/25 13:36:46 by arigonza          #+#    #+#              #
-#    Updated: 2024/01/14 16:42:48 by arigonza         ###   ########.fr        #
+#    Updated: 2024/01/14 17:46:05 by arigonza         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ MLX42 = ./lib/MLX42/build/libmlx42.a
 
 MLX42_INSTALL := mlx_install
 
-MLX42_DIR := ./lib/MLX42
+MLX42_DIR := lib/MLX42
 
 EXTRA := -I include -ldl -lX11 -lXext -lglfw -pthread -lm
 
@@ -108,11 +108,11 @@ norm :
 	@echo "$(DEF_COLOR)"
 
 $(MLX42_INSTALL) :
-	@echo $(YELLOW)"INSTALLING MLX42..."$(DEF_COLOR)
-	cd $(MLX42_DIR)
-	cmake -B build
-	cmake --build build -j4
-	@echo $(GREEN)MLX42 INSTALLED.$(DEF_COLOR)
+	@echo "$(YELLOW)INSTALLING MLX42...$(DEF_COLOR)"
+	@cd $(MLX42_DIR); \
+	@cmake -B build; \
+	@cmake --build build -j4
+	@echo "$(GREEN)MLX42 INSTALLED.$(DEF_COLOR)"
 
 # Colors
 

@@ -6,7 +6,7 @@
 /*   By: arigonza < arigonza@student.42malaga.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 02:29:12 by arigonza          #+#    #+#             */
-/*   Updated: 2024/01/14 13:29:26 by arigonza         ###   ########.fr       */
+/*   Updated: 2024/01/14 17:08:30 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ int	ft_read_map(t_game *game, int fd)
 		line = get_next_line(fd);
 		num_rows++;
 	}
-	if (tmp[0] == '\n')
-		error(MAP_ERROR);
+	//if (tmp[0] == '\n')
+	//	error(MAP_ERROR);
 	game->map = ft_split(tmp, '\n');
 	return (free(line), free(tmp), num_rows);
 }
