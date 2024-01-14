@@ -6,7 +6,7 @@
 #    By: arigonza < arigonza@student.42malaga.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/25 13:36:46 by arigonza          #+#    #+#              #
-#    Updated: 2024/01/14 17:46:05 by arigonza         ###   ########.fr        #
+#    Updated: 2024/01/14 17:58:29 by arigonza         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -110,8 +110,8 @@ norm :
 $(MLX42_INSTALL) :
 	@echo "$(YELLOW)INSTALLING MLX42...$(DEF_COLOR)"
 	@cd $(MLX42_DIR); \
-	@cmake -B build; \
-	@cmake --build build -j4
+	cmake -B build; \
+	make -s -C build -j4;
 	@echo "$(GREEN)MLX42 INSTALLED.$(DEF_COLOR)"
 
 # Colors
