@@ -6,7 +6,7 @@
 /*   By: arigonza < arigonza@student.42malaga.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 14:37:43 by arigonza          #+#    #+#             */
-/*   Updated: 2024/01/13 13:11:54 by arigonza         ###   ########.fr       */
+/*   Updated: 2024/01/14 13:29:19 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct s_game
 
 int				ft_win(t_game *game, int current_y, int current_x);
 void			ft_score(t_game *game);
+void			ft_check_micromap(t_game *game);
 // Utils
 void			error(char *error);
 t_game			*ft_game_init(char *argv);

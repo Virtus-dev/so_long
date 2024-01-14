@@ -6,7 +6,7 @@
 #    By: arigonza < arigonza@student.42malaga.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/25 13:36:46 by arigonza          #+#    #+#              #
-#    Updated: 2024/01/13 13:51:02 by arigonza         ###   ########.fr        #
+#    Updated: 2024/01/14 16:42:48 by arigonza         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,13 +27,6 @@ MLX42 = ./lib/MLX42/build/libmlx42.a
 MLX42_INSTALL := mlx_install
 
 MLX42_DIR := ./lib/MLX42
-
-$(MLX42_INSTALL) :
-	@echo $(YELLOW)INSTALLING MLX42...$(DEF_COLOR)
-	@cd $(MLX42_DIR)
-	@cmake -B build
-	@cmake --build build -j4
-	@echo $(GREEN)MLX42 INSTALLED.$(DEF_COLOR)
 
 EXTRA := -I include -ldl -lX11 -lXext -lglfw -pthread -lm
 
@@ -62,11 +55,6 @@ $(OBJDIR_BONUS)/%.o : bonus/src/%.c | $(OBJDIR_BONUS)
 
 all : $(NAME)
 
-$(NAME) : $(OBJ) $(LIBFT) $(MLX42)
-	@echo "$(YELLOW)Compiling so_long...$(DEF_COLOR)"
-	@$(CC) $(CFLAGS) -o $@ $^ src/main.c $(EXTRA_MAC) 
-	@echo "$(GREEN)so_long ready.$(DEF_COLOR)"
-
 $(LIBFT) :
 	@echo "$(YELLOW)Compiling libft...$(DEF_COLOR)"
 	@make -s -C lib/libft
@@ -76,6 +64,11 @@ $(MLX42) :
 	@echo "$(YELLOW)Compiling MLX42...$(DEF_COLOR)"
 	@make -s -C lib/MLX42/build
 	@echo "$(GREEN)MLX42 compiled.$(DEF_COLOR)"
+
+$(NAME) : $(OBJ) $(LIBFT) $(MLX42)
+	@echo "$(YELLOW)Compiling so_long...$(DEF_COLOR)"
+	@$(CC) $(CFLAGS) -o $@ $^ src/main.c -I includes/ $(EXTRA_MAC) 
+	@echo "$(GREEN)so_long ready.$(DEF_COLOR)"
 
 $(BONUS_NAME) : $(LIBFT) $(MLX42) $(OBJ) $(BONUS_OBJ)
 	@echo "$(YELLOW)Compiling so_long bonus...$(DEF_COLOR)"
@@ -113,6 +106,13 @@ norm :
 	@norminette includes/
 	@norminette bonus/includes/
 	@echo "$(DEF_COLOR)"
+
+$(MLX42_INSTALL) :
+	@echo $(YELLOW)"INSTALLING MLX42..."$(DEF_COLOR)
+	cd $(MLX42_DIR)
+	cmake -B build
+	cmake --build build -j4
+	@echo $(GREEN)MLX42 INSTALLED.$(DEF_COLOR)
 
 # Colors
 

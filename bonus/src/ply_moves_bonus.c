@@ -6,7 +6,7 @@
 /*   By: arigonza < arigonza@student.42malaga.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 20:32:55 by arigonza          #+#    #+#             */
-/*   Updated: 2024/01/13 13:23:02 by arigonza         ###   ########.fr       */
+/*   Updated: 2024/01/14 16:04:38 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	ft_up_b(t_game *game)
 	game->player->y--;
 	game->moves++;
 	ft_score(game);
+	ft_enemy_animation(game);
 }
 
 void	ft_down_b(t_game *game)
@@ -86,6 +87,7 @@ void	ft_down_b(t_game *game)
 	game->player->y++;
 	game->moves++;
 	ft_score(game);
+	ft_enemy_animation(game);
 }
 
 void	ft_left_b(t_game *game)
@@ -113,6 +115,7 @@ void	ft_left_b(t_game *game)
 	game->player->x--;
 	game->moves++;
 	ft_score(game);
+	ft_enemy_animation(game);
 }
 
 void	ft_right_b(t_game *game)
@@ -140,4 +143,5 @@ void	ft_right_b(t_game *game)
 	game->player->x++;
 	game->moves++;
 	ft_score(game);
+	ft_enemy_animation(game);
 }

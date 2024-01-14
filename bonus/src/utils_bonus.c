@@ -6,7 +6,7 @@
 /*   By: arigonza < arigonza@student.42malaga.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 19:52:31 by arigonza          #+#    #+#             */
-/*   Updated: 2024/01/09 16:16:46 by arigonza         ###   ########.fr       */
+/*   Updated: 2024/01/14 16:15:12 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,19 @@ void	ft_load_textures_bonus(t_game *game)
 {
 	mlx_texture_t	*exit_open;
 	mlx_texture_t	*enemy;
+	mlx_texture_t	*enemy_an;
 
 	ft_load_basic_textures(game);
 	exit_open = mlx_load_png("textures/door_open.png");
-	enemy = mlx_load_png("textures/Pumpkin2.png");
+	enemy = mlx_load_png("textures/Pumpkin_portal2.png");
+	enemy_an = mlx_load_png("textures/Pumpkin_portal2_a.png");
 	game->textures->exit_open = mlx_texture_to_image(game->mlx, exit_open);
 	game->textures->enemy = mlx_texture_to_image(game->mlx, enemy);
+	game->textures->enemy_an = mlx_texture_to_image(game->mlx, enemy_an);
+	game->textures->enemy_c = 0;
 	mlx_delete_texture(exit_open);
 	mlx_delete_texture(enemy);
+	mlx_delete_texture(enemy_an);
 }
 
 void	ft_load_basic_textures(t_game *game)
@@ -60,6 +65,7 @@ void	ft_free_all_b(t_game *game)
 	mlx_delete_image(game->mlx, game->textures->floor);
 	mlx_delete_image(game->mlx, game->textures->exit_open);
 	mlx_delete_image(game->mlx, game->textures->enemy);
+	mlx_delete_image(game->mlx, game->textures->enemy_an);
 	ft_free_map(game->map);
 }
 

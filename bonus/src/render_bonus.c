@@ -6,7 +6,7 @@
 /*   By: arigonza < arigonza@student.42malaga.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 15:32:59 by arigonza          #+#    #+#             */
-/*   Updated: 2024/01/13 13:24:48 by arigonza         ###   ########.fr       */
+/*   Updated: 2024/01/14 16:39:03 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ void	ft_render_map_bonus(t_game *game)
 {
 	int		x;
 	int		y;
+	int		i;
 
+	i = 0;
 	game->player->c_counter = 0;
 	y = 0;
 	while (game->map[y])
@@ -35,6 +37,8 @@ void	ft_render_map_bonus(t_game *game)
 		y++;
 	}
 	game->total_c = game->player->c_counter;
+	while (i < game->textures->enemy_c)
+		game->textures->enemy_an->instances[i++].enabled = 0;
 }
 
 void	ft_check_exit_enemy(t_game *game, int y, int x)
@@ -52,7 +56,12 @@ void	ft_check_exit_enemy(t_game *game, int y, int x)
 		mlx_image_to_window(game->mlx, game->textures->exit, x * 32, y * 32);
 	}
 	if (game->map[y][x] == ENEMY)
+	{
 		mlx_image_to_window(game->mlx, game->textures->enemy, x * 32, y * 32);
+		mlx_image_to_window(game->mlx,
+			game->textures->enemy_an, x * 32, y * 32);
+		game->textures->enemy_c++;
+	}
 }
 
 void	ft_dead(t_game *game, int current_y, int current_x)

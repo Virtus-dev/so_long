@@ -6,7 +6,7 @@
 /*   By: arigonza < arigonza@student.42malaga.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 20:46:25 by arigonza          #+#    #+#             */
-/*   Updated: 2024/01/09 16:09:21 by arigonza         ###   ########.fr       */
+/*   Updated: 2024/01/14 15:09:45 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ typedef struct s_texture
 	mlx_image_t	*player;
 	mlx_image_t	*collect_item;
 	mlx_image_t	*enemy;
+	mlx_image_t	*enemy_an;
+	int			enemy_c;
 }	t_texture;
 
 /**
@@ -72,6 +74,7 @@ typedef struct s_game
 int			ft_win_bonus(t_game *game, int current_y, int current_x);
 void		ft_score(t_game *game);
 void		ft_door_open(t_game *game);
+void		ft_enemy_animation(t_game *game);
 // Utils
 void		error(char *error);
 t_game		*ft_game_init_bonus(char *argv);

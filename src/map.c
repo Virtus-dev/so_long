@@ -6,7 +6,7 @@
 /*   By: arigonza < arigonza@student.42malaga.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 02:29:12 by arigonza          #+#    #+#             */
-/*   Updated: 2024/01/13 17:20:50 by arigonza         ###   ########.fr       */
+/*   Updated: 2024/01/14 13:29:26 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,5 +153,6 @@ void	ft_check_map(t_game *game)
 	ft_set_ply_pos(game, mapcpy);
 	ft_flood_fill(mapcpy, game->player->y, game->player->x);
 	ft_check_valid_path(mapcpy);
+	ft_check_micromap(game);
 	ft_free_map(mapcpy);
 }

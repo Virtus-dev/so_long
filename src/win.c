@@ -6,7 +6,7 @@
 /*   By: arigonza < arigonza@student.42malaga.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 13:30:12 by arigonza          #+#    #+#             */
-/*   Updated: 2024/01/13 17:40:58 by arigonza         ###   ########.fr       */
+/*   Updated: 2024/01/14 16:38:22 by arigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,31 @@ int	ft_win(t_game *game, int current_y, int current_x)
 	return (0);
 }
 
-void	ft_check_micromap(t_game *game, char **map)
+void	ft_check_micromap(t_game *game)
 {
-	int	y;
-	int	x;
+	int		y_pos;
+	int		x_pos;
 
-	y = 0;
-	while (map[y])
-	{
-		x = 0;
-		while (map[y][x])
-		{
-			if (game->player->x - 1 == WALL && game->player->x + 1 == WALL
-				&& game->player->y - 1 == WALL)
-				if (game->player->y + 1 == EXIT && game->player->y + 2 == COLLECT_ITEM)
-					error(MAP_ERROR);
-		}
-	}
+	y_pos = game->player->y;
+	x_pos = game->player->x;
+	if (game->map[y_pos][x_pos - 1] == WALL && game->map[y_pos][x_pos + 1]
+		== WALL && game->map[y_pos - 1][x_pos] == WALL)
+		if (game->map[y_pos + 1][x_pos] == EXIT
+			&& game->map[y_pos + 2][x_pos] == COLLECT_ITEM)
+			error(MAP_ERROR);
+	if (game->map[y_pos][x_pos - 1] == WALL && game->map[y_pos][x_pos + 1]
+		== WALL && game->map[y_pos + 1][x_pos] == WALL)
+		if (game->map[y_pos - 1][x_pos] == EXIT
+			&& game->map[y_pos - 2][x_pos] == COLLECT_ITEM)
+			error(MAP_ERROR);
+	if (game->map[y_pos - 1][x_pos] == WALL && game->map[y_pos + 1][x_pos]
+		== WALL && game->map[y_pos][x_pos + 1] == WALL)
+		if (game->map[y_pos][x_pos -1] == EXIT
+			&& game->map[y_pos][x_pos -2] == COLLECT_ITEM)
+			error(MAP_ERROR);
+	if (game->map[y_pos - 1][x_pos] == WALL && game->map[y_pos + 1][x_pos]
+		== WALL && game->map[y_pos][x_pos - 1] == WALL)
+		if (game->map[y_pos][x_pos + 1] == EXIT
+			&& game->map[y_pos][x_pos + 2] == COLLECT_ITEM)
+			error(MAP_ERROR);
 }
